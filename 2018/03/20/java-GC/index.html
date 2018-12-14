@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,GC,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JackeyZz的博客主页" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Java GC概述Java GC(Garbage Collection,垃圾收集,垃圾回收)机制，是Java与C++/C的主要区别之一，一种在Java虚拟机中的自动内存管理和垃圾清扫机制。概括地说，该机制对JVM中的内存进行标记，并确定哪些内存需要回收，根据一定的回收策略，自动的回收内存，永不停息(Never Stop)的保证JVM中的内存空间，防止出现内存泄漏和溢出问题。 stop-the-wo">
+<meta name="keywords" content="java,GC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java_GC">
+<meta property="og:url" content="http://yoursite.com/2018/03/20/java-GC/index.html">
+<meta property="og:site_name" content="JackeyZz的博客主页">
+<meta property="og:description" content="Java GC概述Java GC(Garbage Collection,垃圾收集,垃圾回收)机制，是Java与C++/C的主要区别之一，一种在Java虚拟机中的自动内存管理和垃圾清扫机制。概括地说，该机制对JVM中的内存进行标记，并确定哪些内存需要回收，根据一定的回收策略，自动的回收内存，永不停息(Never Stop)的保证JVM中的内存空间，防止出现内存泄漏和溢出问题。 stop-the-wo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic1.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic2.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic3.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic4.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic5.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic6.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic7.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic8.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic9.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic10.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic11.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic12.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic11.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic13.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic14.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic15.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic16.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/20/java-GC/pic17.png">
+<meta property="og:updated_time" content="2018-09-22T07:36:53.039Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java_GC">
+<meta name="twitter:description" content="Java GC概述Java GC(Garbage Collection,垃圾收集,垃圾回收)机制，是Java与C++/C的主要区别之一，一种在Java虚拟机中的自动内存管理和垃圾清扫机制。概括地说，该机制对JVM中的内存进行标记，并确定哪些内存需要回收，根据一定的回收策略，自动的回收内存，永不停息(Never Stop)的保证JVM中的内存空间，防止出现内存泄漏和溢出问题。 stop-the-wo">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/20/java-GC/pic1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/20/java-GC/">
+
+
+
+
+
+  <title>java_GC | JackeyZz的博客主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JackeyZz的博客主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/20/java-GC/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackeyZz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackeyZz的博客主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java_GC</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T11:26:08+08:00">
+                2018-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/java整理总结/" itemprop="url" rel="index">
+                    <span itemprop="name">java整理总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/20/java-GC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/20/java-GC/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Java-GC概述"><a href="#Java-GC概述" class="headerlink" title="Java GC概述"></a>Java GC概述</h2><p>Java GC(Garbage Collection,垃圾收集,垃圾回收)机制，是Java与C++/C的主要区别之一，一种在Java虚拟机中的自动内存管理和垃圾清扫机制。概括地说，该机制对JVM中的内存进行标记，并确定哪些内存需要回收，根据一定的回收策略，自动的回收内存，永不停息(Never Stop)的保证JVM中的内存空间，防止出现内存泄漏和溢出问题。</p>
+<h3 id="stop-the-world"><a href="#stop-the-world" class="headerlink" title="stop-the-world"></a>stop-the-world</h3><p><code>stop-the-world</code>会在任何一种GC算法中发生，它意味着JVM因为需要执行GC而停止了应用程序的执行。当<code>stop-the-world</code>发生时，除GC所需的线程外，所有的线程都进入等待状态，直到GC任务完成。GC优化很多时候就是减少<code>stop-the-world</code>的发生。</p>
+<h3 id="JVM-GC回收垃圾的区域"><a href="#JVM-GC回收垃圾的区域" class="headerlink" title="JVM GC回收垃圾的区域"></a>JVM GC回收垃圾的区域</h3><p><img src="/2018/03/20/java-GC/pic1.png" alt="java内存"><br>私有内存区伴随着线程的产生而产生，一旦线程中止，私有内存区也会自动消除。故GC内存回收主要是针对共享内存区。</p>
+<table>
+<thead>
+<tr>
+<th>区域名称</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>java堆</td>
+<td>java虚拟机管理的内存中最大的一块，所有线程共享，几乎所有的对象实例和数组都在这类分配内存。GC主要就是在java堆中进行的</td>
+</tr>
+<tr>
+<td>方法区</td>
+<td>用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。但是已经被最新的JVM取消了。现在被加载的类作为元数据加载到底层操作系统的本地内存区</td>
+</tr>
+</tbody>
+</table>
+<h3 id="JVM-GC的分类"><a href="#JVM-GC的分类" class="headerlink" title="JVM GC的分类"></a>JVM GC的分类</h3><p>GC主要在java堆进行，故对java堆进行描述：<br>堆内存是由存活和死亡的对象组成的。存活的对象是应用可以访问到的，不会被垃圾回收。死亡的对象是应用不可访问尚且还没被垃圾收集器回收掉的对象。一直到垃圾收集器把这些对象回收掉之前，它们会一直占据堆内存空间。堆是应用程序在运行期间请求操作系统分配给自己的向高地址扩展的数据结构，是不连续的内存区域。即:程序运行时动态申请某个大小的内存空间。<br><img src="/2018/03/20/java-GC/pic2.png" alt="堆内存">  </p>
+<ul>
+<li>新生代(新域):存储所有新生成的对象<br>刚刚新建的对象在<code>Eden(伊甸园)</code>中，当<code>Eden</code>充满时，经历一次<code>Minor GC</code>,<code>Eden</code>中的存活对象就会被移动到第一块<code>survivor space S0</code>，<code>Eden</code>被清空；等<code>Eden</code>区再满了，就再触发一次<code>Minor GC</code>,<code>Eden</code>和<code>S0</code>中的存活对象又会被复制送入第二块<code>survivor space S1</code>。<code>S0</code>和<code>Eden</code>被清空，然后下一轮<code>S0</code>和<code>S1</code>交换角色，如此循环往复。如果对象的复制次数达到16次，该对象就会被送到老年代中。</li>
+<li>老年代(旧域):新域中的对象，经过了一定次数的GC循环后，被移入旧域</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>GC名称</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minor GC</td>
+<td>发生在新生代，频率高，速度快(大部分对象活不过一次Minor GC)</td>
+</tr>
+<tr>
+<td>Major GC</td>
+<td>发生在老年代，速度慢</td>
+</tr>
+<tr>
+<td>Full GC</td>
+<td>清理整个堆空间</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>永久域：存储类和方法对象，从配置的角度看，这个域是独立的，不包括在JVM堆内。默认为4M</li>
+</ul>
+<p>当我们创建一个对象后，它在堆内存的位置变化(如果<code>Major GC</code>之后还是老年代不足，则JVM抛出内存不足的异常)：<br><img src="/2018/03/20/java-GC/pic3.png" alt="堆内存"></p>
+<h3 id="设置两个survivor-space的原因"><a href="#设置两个survivor-space的原因" class="headerlink" title="设置两个survivor space的原因"></a>设置两个<code>survivor space</code>的原因</h3><p>最大的好处就是解决了内存碎片化。<br>假设只有一个<code>survivor</code>区，则当<code>Eden</code>和<code>survivor</code>各有一些存活对象时触发<code>Minor GC</code>,此时将<code>Eden</code>区的存活对象硬放到<code>survivor</code>区中，显然这两部分对象所占有的内存是不连续的，也就导致了内存碎片化。<br><img src="/2018/03/20/java-GC/pic4.png" alt="一个survivor"><br>显然建立两个<code>survivor</code>区可以解决内存碎片化的问题。刚刚新建的对象在<code>Eden</code>中，经历一次<code>Minor GC</code>，<code>Eden</code>中的存活对象就会被移动到第一块<code>survivor space S0</code>，<code>Eden</code>被清空；等<code>Eden</code>区再满了，就再触发一次<code>Minor GC</code>，<code>Eden</code>和<code>S0</code>中的存活对象又会被复制送入第二块<code>survivor space S1</code>(这个过程非常重要，因为这种复制算法保证了<code>S1</code>中来自<code>S0</code>和<code>Eden</code>两部分的存活对象占用连续的内存空间，避免了碎片化的发生)。<code>S0</code>和<code>Eden</code>被清空，然后下一轮<code>S0</code>与<code>S1</code>交换角色，如此循环往复。<br><img src="/2018/03/20/java-GC/pic5.png" alt="两个survivor">  </p>
+<h2 id="对象存活判断"><a href="#对象存活判断" class="headerlink" title="对象存活判断"></a>对象存活判断</h2><p>判断对象是否存活一般有两种方式：</p>
+<ul>
+<li>引用计数：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。</li>
+<li>可达性分析：从<code>GC Roots</code>开始向下搜索，搜索所走过的路径称为引用链。当一个对象到<code>GC Roots</code>没有任何引用链相连时，则证明此对象是不可用的，为不可达对象。如下图：Object5、6、7虽然互有关联，但它们到<code>GC Roots</code>是不可达的，因此也会被判定为可回收的对象。<br><img src="/2018/03/20/java-GC/pic6.png" alt="GC roots"><br>即使在可达性分析算法中不可达的对象，JVM也并不是马上对其回收，因为要真正宣告一个对象死亡，至少要经历两次标记过程：第一次是在可达性分析后发现没有与<code>GC Roots</code>相连接的引用链，第二次是GC对在<code>F-Queue</code>执行队列中的对象进行的小规模标记(对象需要覆盖<code>finalize()</code>方法且没被调用过)。</li>
+</ul>
+<p>在Java语言中，<code>GC Roots</code>包括：</p>
+<ul>
+<li>虚拟机栈中引用的对象</li>
+<li>方法区中类静态属性实体引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI引用的对象</li>
+</ul>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><ul>
+<li>分代收集算法是将对象的生命周期按长短进行划分</li>
+<li>分区收集算法是将整个堆空间划分为连续的不同小区间，每个小区间独立使用，独立回收，这样做的好处是可以控制一次回收多少个小区间。  </li>
+</ul>
+<p>在相同条件下，堆空间越大，一次GC耗时就越长，从而产生的停顿也越长。为了更好地控制GC产生的停顿时间，将一块大的内存区域分割成多个小块，根据目标停顿时间，每次合理地回收若干个小区间(而不是整个堆)，从而减少一次GC所产生的停顿。</p>
+<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><ul>
+<li>在新生代中每次垃圾收集都能发现大批对象已死，只有少量存活，因此选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。  </li>
+<li>在老年代中因为对象存活率高、没有额外空间对它进行分配担保，就必须采用“标记-清理”或“标记-整理”算法来进行回收，不必进行内存复制，且直接腾出空闲内存。</li>
+</ul>
+<h4 id="新生代-复制算法"><a href="#新生代-复制算法" class="headerlink" title="新生代-复制算法"></a>新生代-复制算法</h4><p>该算法的核心是将可用内存按容量划分为大小相等的两块，每次只用其中一块，当这一块的内存用完，就将还存活的对象复制到另外一块上面，然后把已使用过的内存空间一次清理掉。即为两块<code>survivor space</code>。<br><img src="/2018/03/20/java-GC/pic7.png" alt="复制算法"><br>由于新生代的98%的对象都是生存周期极短的，所以将新生代划分为一块较大的<code>Eden</code>区和两块较小的<code>survivor</code>区(<code>HotSpot</code>默认<code>Eden</code>和<code>survivor</code>的大小比例为8:1)，每次只用<code>Eden</code>和其中一块<code>survivor</code>。当发生<code>Minor GC</code>时，将<code>Eden</code>和<code>survivor</code>中还存活的对象一次性地拷贝到另外一块<code>survivor</code>上，最后清理掉<code>Eden</code>和刚才用过的<code>survivor</code>的空间。当<code>survivor</code>空间不够用(不足以保存尚存活的对象)时，需要依赖老年代进行空间分配担保机制，这部分内存直接进入老年代。</p>
+<h4 id="老年代-标记清除算法"><a href="#老年代-标记清除算法" class="headerlink" title="老年代-标记清除算法"></a>老年代-标记清除算法</h4><p>该算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象(可达性分析)，在标记完成后统一清理掉所有被标记的对象<br>该算法会有以下两个问题：</p>
+<ul>
+<li>效率问题：标记和清除过程的效率都不高</li>
+<li>空间问题：标记清除后会产生大量不连续的内存碎片，空间碎片太多可能会导致在运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集<br><img src="/2018/03/20/java-GC/pic8.png" alt="标记清除算法">  </li>
+</ul>
+<h4 id="老年代-标记整理算法"><a href="#老年代-标记整理算法" class="headerlink" title="老年代-标记整理算法"></a>老年代-标记整理算法</h4><p>标记清除算法会产生内存碎片问题，而复制算法需要有额外的内存担保空间，于是针对老年代的特点，有了标记整理算法。标记整理算法的标记过程与标记清除算法相同，但后续步骤不再对可回收对象直接清理，而是让所有存活的对象都向一端移动，然后清理掉端边界以外的内存。<br><img src="/2018/03/20/java-GC/pic9.png" alt="标记整理算法"></p>
+<h4 id="永久代-方法区回收"><a href="#永久代-方法区回收" class="headerlink" title="永久代-方法区回收"></a>永久代-方法区回收</h4><p>在方法区进行垃圾回收一般“性价比”较低，因为在方法区主要回收两部分内容：废弃常量和无用的类。回收废弃常量与回收其他年代中的对象类似，但要判断一个类是否无用则条件相当苛刻：</p>
+<ul>
+<li>该类所有的实例都已经被回收，java堆中不存在该类的任何实例</li>
+<li>该类对应的<code>class</code>对象没有在任何地方被引用(也就是在任何地方都无法通过反射访问该类的方法)</li>
+<li>加载该类的<code>ClassLoader</code>已经被回收  </li>
+</ul>
+<p>但即使满足以上条件也未必一定会回收，<code>HotSpot VM</code>还提供了<code>-Xnoclassgc</code>参数控制(关闭<code>class</code>的垃圾回收功能)。因此在大量使用动态代理、<code>CGLib</code>等字节码框架的应用中一定要关闭该选项，开启VM的类卸载功能，以保证方法区不会溢出。</p>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p><img src="/2018/03/20/java-GC/pic10.png" alt="收集器">  </p>
+<h3 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h3><h4 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h4><p>Serial收集器是Hotspot运行在Client模式下的默认新生代收集器，它的特点是只用一个CPU/一条收集线程去完成GC工作，且在进行垃圾收集时必须暂停其他所有的工作线程(“stop the world”，即为STW)。<br><img src="/2018/03/20/java-GC/pic11.png" alt="收集器"><br>虽然是单线程收集，但它却简单而高效。在VM管理内存不大的情况下(收集几十M到一两百M的新生代)，停顿时间完全可以控制在几十毫秒~一百多毫秒内。</p>
+<h4 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h4><p>ParNew收集器其实是Serial的多线程版本，除了使用多线程进行GC外，包括Serial可用的所有控制参数、收集算法、STW、对象分配规则、回收策略等都与Serial完全一样(也是VM启用CMS收集器<code>-x:+UseConcMarkSweepGC</code>的默认新生代收集器)<br><img src="/2018/03/20/java-GC/pic12.png" alt="收集器"><br>由于存在线程切换的开销，ParNew收集器在单CPU的环境中比不上Serial，且在通过超线程技术实现的两个CPU的环境中也不能100%保证能超越Serial。但随着可用的CPU数量的增加，收集效率肯定也会大大增加(ParNew收集器收集线程数与CPU数量相同，因此在CPU数量过大的环境中，可用<code>-xx:ParallelGCThreads</code>参数控制GC线程数)。</p>
+<h4 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h4><p>与ParNew类似，Parallel Scavenge也是使用复制算法，也是并行多线程收集器。但与其他收集器关注尽可能缩短垃圾收集时间不同，Parallel Scavenge更关注系统吞吐量：<br><code>系统吞吐量=运行用户代码时间(运行用户代码时间+垃圾收集时间)</code><br>停顿时间越短就越适用于用户交互的程序，良好的响应速度能提升用户的体验；而高吞吐量则适用于后台运算而不需要太多交互的任务，可以最高效率地利用CPU时间，尽快地完成程序的运算任务，Parallel Scavenge提供了如下参数设置系统吞吐量：</p>
+<table>
+<thead>
+<tr>
+<th>Parallel Scavenge参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MaxGCPauseMillis</code></td>
+<td>(毫秒数)收集器将尽力保证内存回收花费的时间不超过设定值，但如果太小将会导致GC的频率增加</td>
+</tr>
+<tr>
+<td><code>GCTimeRatio</code></td>
+<td>(整数：<code>0&lt;GCTimeRatio&lt;100</code>)是垃圾收集时间占总时间的比率</td>
+</tr>
+<tr>
+<td><code>xx:+UseAdaptiveSizePolicy</code></td>
+<td>启用GC自适应的调节策略：不再需要手工指定<code>-Xmn、-xx:survivorRatio、-xx:PretenureSizeThreshold</code>等细节参数，VM会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最合适的停顿时间或最大的吞吐量</td>
+</tr>
+</tbody>
+</table>
+<h3 id="老年代"><a href="#老年代" class="headerlink" title="老年代"></a>老年代</h3><h4 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h4><p>Serial Old是Serial收集器的老年代版本，同样是单线程收集器，使用“标记-整理”算法<br><img src="/2018/03/20/java-GC/pic11.png" alt="收集器"><br>应用场景如下：</p>
+<ul>
+<li>JDK1.5之前与Parallel Scavenge收集器搭配使用</li>
+<li>作为CMS收集器的后备预案，在并发收集发生<code>Concurrent Mode Failure</code>时启用</li>
+</ul>
+<h4 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h4><p>是Parallel Scavenge的老年代版本，使用多线程和“标记-整理”算法，吞吐量优先，主要与Parallel Scavenge配合在注重吞吐量和CPU资源敏感系统内使用：<br><img src="/2018/03/20/java-GC/pic13.png" alt="收集器"></p>
+<h4 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h4><p>CMS(Concurrent Mark Sweep)收集器是一款具有划时代意义的收集器，真正意义上的并发收集器。CMS是一种以获取最短回收停顿时间为目标的收集器(又被称为多并发低暂停的收集器)，基于“标记-清除”算法实现，整个GC过程分为：</p>
+<ul>
+<li>初始标记</li>
+<li>并发标记(GC Roots Tracing过程)</li>
+<li>重新标记</li>
+<li>并发清除<br>其中初始标记和重新标记仍需STW，但初始标记仅只标记一下GC Roots能直接关联到的对象，速度很快；而重新标记则是为了修正并发标记期间因用户程序继续运行而导致标记产生变动的那一部分对象的标记记录，虽然一般比初始标记阶段稍长，但要远小于并发标记时间。<br><img src="/2018/03/20/java-GC/pic14.png" alt="收集器"><br>由于整个GC过程耗时最长的并发标记和并发清除阶段的GC过程可与用户线程一起工作，所以总体上CMS的GC过程是与用户线程一起并发地执行的。</li>
+</ul>
+<p>CMS的缺点：</p>
+<ul>
+<li><code>CMS默认启动的回收线程数=(CPU数目+3)/4</code>。当CPU数&gt;4时，GC线程最多占用不超过25%的CPU资源；但当CPU数&lt;=4时，GC线程可能就会过多的占用用户CPU资源，从而导致应用程序变慢，总吞吐量降低。</li>
+<li>无法处理浮动垃圾(指在CMS并发清理阶段用户线程运行而产生的新垃圾)。</li>
+<li>CMS采用“标记-清除”算法实现，可能会产生大量的内存碎片，内存碎片过多可能会导致无法分配大对象而提前触发Full GC。</li>
+</ul>
+<h3 id="分区收集-G1收集器"><a href="#分区收集-G1收集器" class="headerlink" title="分区收集-G1收集器"></a>分区收集-G1收集器</h3><p>G1(Garbage-First)是一款面向服务端应用的收集器，主要目标用于配备多CPU的服务器治理大内存。G1将整个java堆划分为多个大小相等的独立区域(Region)，虽然还保留有新生代和老年代的概念，但不再是物理隔离的了，都是一部分Region(不需要连续)的集合。<br><img src="/2018/03/20/java-GC/pic15.png" alt="收集器"><br>每块区域既有可能属于O区，也有可能属于Y区，因此不需要一次就对整个老年代/新生代回收。而是当线程并发寻找可回收的对象时，有些区块包含可回收的对象要比其他区块多很多。虽然在清理这些区块时G1仍然需要暂停应用程序，但可以用相对较少的时间优先回收垃圾较多的Region(这也是G1命名的来源)。这种方式保证了G1可以在有限的时间内获取尽可能高的收集效率。</p>
+<h4 id="新生代收集"><a href="#新生代收集" class="headerlink" title="新生代收集"></a>新生代收集</h4><p><img src="/2018/03/20/java-GC/pic16.png" alt="收集器"><br>G1的新生代收集跟ParNew类似：存活的对象被转移到一个/多个Survivor Region。如果存活时间达到阈值，这部分对象就会被提升到老年代。<br><img src="/2018/03/20/java-GC/pic17.png" alt="收集器"><br>G1的新生代收集特点如下：</p>
+<ul>
+<li>一整块堆内存被分为多个Regions</li>
+<li>存活对象被拷贝到新的Survivor区或老年代</li>
+<li>新生代内存由一组不连续的heap区组成，这种方法使得可以动态调整各代区域尺寸</li>
+<li>Young GCs会有STW事件，进行时所有应用程序线程都会被暂停</li>
+<li>多线程并发GC</li>
+</ul>
+<h4 id="老年代收集"><a href="#老年代收集" class="headerlink" title="老年代收集"></a>老年代收集</h4><p>G1老年代GC执行步骤如下：</p>
+<ul>
+<li>初始标记:附着一次新生代GC，以标记Survivor中可能引用到老年代对象的Regions。</li>
+<li>扫描根区域:扫描Survivor中能够引用到老年代的references。但必须在Minor GC触发前执行完</li>
+<li>并发标记:在整个堆中查找存活对象，但该阶段可能会被Minor GC中断</li>
+<li>重新标记:完成堆内存中存活对象的标记，使用<code>snapshot-at-the-beginning(SATB,起始快照)</code>算法，比CMS所用算法要快得多(空Region直接被移除并回收，并计算所有区域的活跃度)</li>
+<li>清理<ul>
+<li>STW:在含有存活对象和完全空闲的区域上进行统计</li>
+<li>STW:擦除<code>Remembered Sets</code></li>
+<li>Concurrent:重置空regions并将它们返还给空闲列表(free list)</li>
+</ul>
+</li>
+<li>拷贝清理</li>
+</ul>
+<p>G1老年代GC特点如下：</p>
+<ul>
+<li>并发标记阶段<ul>
+<li>在与应用程序并发执行的过程中会计算活跃度信息</li>
+<li>这些活跃度信息标识出那些regions最合适在STW期间回收</li>
+<li>不像CMS有清理阶段</li>
+</ul>
+</li>
+<li>再次标记阶段<ul>
+<li>使用SATB算法比CMS快得多</li>
+<li>空regions直接被回收</li>
+</ul>
+</li>
+<li>拷贝/清理阶段<ul>
+<li>新生代和老年代同时回收</li>
+<li>老年代内存回收会基于它的活跃度信息</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/GC/" rel="tag"><i class="fa fa-tag"></i> GC</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/19/企业软件开发-EJB/" rel="next" title="企业软件开发_EJB">
+                <i class="fa fa-chevron-left"></i> 企业软件开发_EJB
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/21/deeplearning-MLP/" rel="prev" title="deeplearning_MLP">
+                deeplearning_MLP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="JackeyZz">
+            
+              <p class="site-author-name" itemprop="name">JackeyZz</p>
+              <p class="site-description motion-element" itemprop="description">奋不顾身地前进，只为coding未来    得之幸之，失之淡之...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/JackeyZz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/代码dog也要文艺范JackeyZz" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="460649234@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-GC概述"><span class="nav-number">1.</span> <span class="nav-text">Java GC概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stop-the-world"><span class="nav-number">1.1.</span> <span class="nav-text">stop-the-world</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-GC回收垃圾的区域"><span class="nav-number">1.2.</span> <span class="nav-text">JVM GC回收垃圾的区域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-GC的分类"><span class="nav-number">1.3.</span> <span class="nav-text">JVM GC的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置两个survivor-space的原因"><span class="nav-number">1.4.</span> <span class="nav-text">设置两个survivor space的原因</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象存活判断"><span class="nav-number">2.</span> <span class="nav-text">对象存活判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">3.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分代收集算法"><span class="nav-number">3.1.</span> <span class="nav-text">分代收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新生代-复制算法"><span class="nav-number">3.1.1.</span> <span class="nav-text">新生代-复制算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#老年代-标记清除算法"><span class="nav-number">3.1.2.</span> <span class="nav-text">老年代-标记清除算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#老年代-标记整理算法"><span class="nav-number">3.1.3.</span> <span class="nav-text">老年代-标记整理算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#永久代-方法区回收"><span class="nav-number">3.1.4.</span> <span class="nav-text">永久代-方法区回收</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">4.</span> <span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新生代"><span class="nav-number">4.1.</span> <span class="nav-text">新生代</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Serial收集器"><span class="nav-number">4.1.1.</span> <span class="nav-text">Serial收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ParNew收集器"><span class="nav-number">4.1.2.</span> <span class="nav-text">ParNew收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parallel-Scavenge收集器"><span class="nav-number">4.1.3.</span> <span class="nav-text">Parallel Scavenge收集器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#老年代"><span class="nav-number">4.2.</span> <span class="nav-text">老年代</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Serial-Old收集器"><span class="nav-number">4.2.1.</span> <span class="nav-text">Serial Old收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parallel-Old收集器"><span class="nav-number">4.2.2.</span> <span class="nav-text">Parallel Old收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMS收集器"><span class="nav-number">4.2.3.</span> <span class="nav-text">CMS收集器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区收集-G1收集器"><span class="nav-number">4.3.</span> <span class="nav-text">分区收集-G1收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新生代收集"><span class="nav-number">4.3.1.</span> <span class="nav-text">新生代收集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#老年代收集"><span class="nav-number">4.3.2.</span> <span class="nav-text">老年代收集</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackeyZz</span>
+
+  
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

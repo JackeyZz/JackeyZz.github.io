@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="企业软件开发,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JackeyZz的博客主页" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="企业软件系统概述计算程序的基本组成:  表示层 业务逻辑层 数据访问层  大型互联网应用系统具有的特点：  高并发、大流量 高可用 海量数量 用户分布广泛、网络情况复杂 安全环境恶劣 需求快速变更，发布频繁  网站访问的二八定律：  80%的访问集中在20%的数据上 20%数据集中在内存缓存  web服务器 Microsoft IIS:仅支持window,用于.net Tomcat 轻量级 开源">
+<meta name="keywords" content="企业软件开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="企业软件开发_EJB3.0、性能调优、web服务器">
+<meta property="og:url" content="http://yoursite.com/2018/05/15/企业软件开发-EJB3-0、性能调优、web服务器/index.html">
+<meta property="og:site_name" content="JackeyZz的博客主页">
+<meta property="og:description" content="企业软件系统概述计算程序的基本组成:  表示层 业务逻辑层 数据访问层  大型互联网应用系统具有的特点：  高并发、大流量 高可用 海量数量 用户分布广泛、网络情况复杂 安全环境恶劣 需求快速变更，发布频繁  网站访问的二八定律：  80%的访问集中在20%的数据上 20%数据集中在内存缓存  web服务器 Microsoft IIS:仅支持window,用于.net Tomcat 轻量级 开源">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-22T07:36:53.298Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="企业软件开发_EJB3.0、性能调优、web服务器">
+<meta name="twitter:description" content="企业软件系统概述计算程序的基本组成:  表示层 业务逻辑层 数据访问层  大型互联网应用系统具有的特点：  高并发、大流量 高可用 海量数量 用户分布广泛、网络情况复杂 安全环境恶劣 需求快速变更，发布频繁  网站访问的二八定律：  80%的访问集中在20%的数据上 20%数据集中在内存缓存  web服务器 Microsoft IIS:仅支持window,用于.net Tomcat 轻量级 开源">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/15/企业软件开发-EJB3-0、性能调优、web服务器/">
+
+
+
+
+
+  <title>企业软件开发_EJB3.0、性能调优、web服务器 | JackeyZz的博客主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JackeyZz的博客主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/企业软件开发-EJB3-0、性能调优、web服务器/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackeyZz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackeyZz的博客主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">企业软件开发_EJB3.0、性能调优、web服务器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-15T19:35:05+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/课堂笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课堂笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/15/企业软件开发-EJB3-0、性能调优、web服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/15/企业软件开发-EJB3-0、性能调优、web服务器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="企业软件系统概述"><a href="#企业软件系统概述" class="headerlink" title="企业软件系统概述"></a>企业软件系统概述</h2><p>计算程序的基本组成:</p>
+<ul>
+<li>表示层</li>
+<li>业务逻辑层</li>
+<li>数据访问层</li>
+</ul>
+<p>大型互联网应用系统具有的特点：</p>
+<ul>
+<li>高并发、大流量</li>
+<li>高可用</li>
+<li>海量数量</li>
+<li>用户分布广泛、网络情况复杂</li>
+<li>安全环境恶劣</li>
+<li>需求快速变更，发布频繁</li>
+</ul>
+<p>网站访问的二八定律：</p>
+<ul>
+<li>80%的访问集中在20%的数据上</li>
+<li>20%数据集中在内存缓存</li>
+</ul>
+<h2 id="web服务器"><a href="#web服务器" class="headerlink" title="web服务器"></a>web服务器</h2><ul>
+<li>Microsoft IIS:仅支持window,用于.net</li>
+<li>Tomcat<ul>
+<li>轻量级</li>
+<li>开源</li>
+<li>被使用最广泛</li>
+<li>主流jsp/servlet容器，但需要配合weblogic、Jboss等容器使用EJB</li>
+</ul>
+</li>
+<li>Apache<ul>
+<li>使用排名第一</li>
+<li>以进程为基础的结构</li>
+<li>与Tomcat的区别<ul>
+<li>Apache支持静态页，Tomcat支持动态的</li>
+<li>Apache是一个web服务器环境程序，可作为web服务器使用，tomcat 是应用(java)服务器，是Apache的扩展，又独立于Apache</li>
+<li>Apache侧重http server，Tomcat侧重servlet引擎</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lighttpd<ul>
+<li>德国的</li>
+<li>OpenSource轻量级</li>
+<li>单线程，针对大量持续连接</li>
+</ul>
+</li>
+<li>Nginx<ul>
+<li>俄罗斯的</li>
+<li>以事件驱动方式编写的</li>
+<li>反向代理、负载平web服务器、http反向代理和邮件代理服务器</li>
+<li>全球使用量第三</li>
+<li>特点：<ul>
+<li>高并发连接</li>
+<li>内存消耗少</li>
+<li>配置文件非常简单</li>
+<li>成本低廉</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tengine</li>
+</ul>
+<h2 id="Websphere-MQ"><a href="#Websphere-MQ" class="headerlink" title="Websphere MQ"></a>Websphere MQ</h2><p>WebSphere MQ 为用户和应用开发人员提供了一种直接，简单，成熟的手段以实现应用系统在不同操作系统平台之间稳定可靠地传递，交换重要的数据和信息，确保消息不丢失/不复传。</p>
+<p>MQ的传输协议是TCP，以安全性为主，支持文件，不支持文件目录的传输。<br>MQ的连接机制是通道、队列，传输方式是消息(消息描述符+用户数据)</p>
+<p>消息分为</p>
+<ul>
+<li>请求消息</li>
+<li>回复消息</li>
+<li>报文消息</li>
+<li>报告消息</li>
+</ul>
+<p>死信队列是存储无法发送到其正确目的地的消息的队列。</p>
+<p>WebSphere MQ是唯一可保证信息一次性传输的中间件,确保对消息一次仅且一次(once-and-only-once)的传递，做到不丢失、不重传、次序不乱。</p>
+<p>触发应用程序是指MQ能够在触发条件满足时，唤醒应用程序的执行，即应用程序不必总是在运行中的。<br>触发的对象：</p>
+<ul>
+<li>应用程序</li>
+<li>通道</li>
+</ul>
+<h2 id="EJB3-0"><a href="#EJB3-0" class="headerlink" title="EJB3.0"></a>EJB3.0</h2><p>相比EJB2.0：</p>
+<ul>
+<li>使用java元数据注释</li>
+<li>简化访问EJB环境的API</li>
+<li>不需要home接口、对象接口以及组件接口</li>
+<li>提供另外两种获取资源的方式<ul>
+<li>在EJB2.0:通过InitialContext的lookup方法来获取资源;</li>
+<li>在EJB3.0:通过EJBContext的lookup方法;</li>
+<li>通过依赖注入方式;</li>
+</ul>
+</li>
+<li>消除了持久实体需要的所有接口</li>
+</ul>
+<h2 id="EJB性能优化"><a href="#EJB性能优化" class="headerlink" title="EJB性能优化"></a>EJB性能优化</h2><h3 id="无状态会话bean调优"><a href="#无状态会话bean调优" class="headerlink" title="无状态会话bean调优"></a>无状态会话bean调优</h3><ul>
+<li>调整实例池大小</li>
+<li>设置实例池空闲延时</li>
+<li>有效缓存资源</li>
+</ul>
+<h3 id="有状态会话bean调优"><a href="#有状态会话bean调优" class="headerlink" title="有状态会话bean调优"></a>有状态会话bean调优</h3><ul>
+<li>调整缓存大小</li>
+<li>有效控制序列化</li>
+</ul>
+<h3 id="实体bean调优"><a href="#实体bean调优" class="headerlink" title="实体bean调优"></a>实体bean调优</h3><ul>
+<li>使用CMP 2.x或JPA。</li>
+<li>提供本地接口；</li>
+<li>对实例池大小进行调整；</li>
+<li>调整缓存大小；</li>
+<li>选择合适的事务语义和事务隔离级别；</li>
+<li>在获得大量数据时，建议使用JDBC；</li>
+<li>在BMP中优化JDBC操作；</li>
+<li>选择合适的RDBMS驱动；</li>
+<li>批量更新或获取。</li>
+</ul>
+<h3 id="MDB调优"><a href="#MDB调优" class="headerlink" title="MDB调优"></a>MDB调优</h3><ul>
+<li>调整实例池大小</li>
+<li>JMS相关调整</li>
+</ul>
+<h3 id="web服务器调优"><a href="#web服务器调优" class="headerlink" title="web服务器调优"></a>web服务器调优</h3><ul>
+<li>如果Web应用是无状态的，则关闭HTTP会话支持这一特性。&lt;%page session=“false”%&gt;</li>
+<li>不要在session中存储大量的对象，及时释放会话。</li>
+<li>针对不同HTTP keek-alive设置，设置相应的优化值。</li>
+<li>将JSP重新编译选项关闭；</li>
+<li>使用Web服务提供的JSP、Servlet缓存技术；</li>
+<li>不要使用Servlet规范已经丢弃的单线程模型。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/企业软件开发/" rel="tag"><i class="fa fa-tag"></i> 企业软件开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/14/企业软件开发-J2EE/" rel="next" title="企业软件开发_J2EE">
+                <i class="fa fa-chevron-left"></i> 企业软件开发_J2EE
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/18/模式识别总结4-SVM/" rel="prev" title="模式识别总结4_SVM">
+                模式识别总结4_SVM <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="JackeyZz">
+            
+              <p class="site-author-name" itemprop="name">JackeyZz</p>
+              <p class="site-description motion-element" itemprop="description">奋不顾身地前进，只为coding未来    得之幸之，失之淡之...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/JackeyZz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/代码dog也要文艺范JackeyZz" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="460649234@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#企业软件系统概述"><span class="nav-number">1.</span> <span class="nav-text">企业软件系统概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web服务器"><span class="nav-number">2.</span> <span class="nav-text">web服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Websphere-MQ"><span class="nav-number">3.</span> <span class="nav-text">Websphere MQ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EJB3-0"><span class="nav-number">4.</span> <span class="nav-text">EJB3.0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EJB性能优化"><span class="nav-number">5.</span> <span class="nav-text">EJB性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无状态会话bean调优"><span class="nav-number">5.1.</span> <span class="nav-text">无状态会话bean调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有状态会话bean调优"><span class="nav-number">5.2.</span> <span class="nav-text">有状态会话bean调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实体bean调优"><span class="nav-number">5.3.</span> <span class="nav-text">实体bean调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MDB调优"><span class="nav-number">5.4.</span> <span class="nav-text">MDB调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web服务器调优"><span class="nav-number">5.5.</span> <span class="nav-text">web服务器调优</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackeyZz</span>
+
+  
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
