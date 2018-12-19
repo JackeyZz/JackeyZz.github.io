@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="排序,分治,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JackeyZz的博客主页" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="想要撸一遍算法导论的想法很早就有的，但是人之懒性无奈之，直到看到一句励志的话，你永远不知道，你以后要有多努力，才能弥补现在的懒惰。我这人很懒，索性现在稍微努力点，也是为了以后可以偷懒。所以now rather thinking than action。共勉之…算法导论day1算法在计算中的作用算法(algorithm)就是任何良定义的计算过程，该过程取某个值或值的集合作为输入并产生某个值或值的集合">
+<meta name="keywords" content="排序,分治">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法导论day1">
+<meta property="og:url" content="http://yoursite.com/2018/01/26/算法导论day1/index.html">
+<meta property="og:site_name" content="JackeyZz的博客主页">
+<meta property="og:description" content="想要撸一遍算法导论的想法很早就有的，但是人之懒性无奈之，直到看到一句励志的话，你永远不知道，你以后要有多努力，才能弥补现在的懒惰。我这人很懒，索性现在稍微努力点，也是为了以后可以偷懒。所以now rather thinking than action。共勉之…算法导论day1算法在计算中的作用算法(algorithm)就是任何良定义的计算过程，该过程取某个值或值的集合作为输入并产生某个值或值的集合">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-22T07:36:53.604Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法导论day1">
+<meta name="twitter:description" content="想要撸一遍算法导论的想法很早就有的，但是人之懒性无奈之，直到看到一句励志的话，你永远不知道，你以后要有多努力，才能弥补现在的懒惰。我这人很懒，索性现在稍微努力点，也是为了以后可以偷懒。所以now rather thinking than action。共勉之…算法导论day1算法在计算中的作用算法(algorithm)就是任何良定义的计算过程，该过程取某个值或值的集合作为输入并产生某个值或值的集合">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/26/算法导论day1/">
+
+
+
+
+
+  <title>算法导论day1 | JackeyZz的博客主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JackeyZz的博客主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/26/算法导论day1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackeyZz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackeyZz的博客主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法导论day1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-26T02:50:20+08:00">
+                2018-01-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法导论blog/" itemprop="url" rel="index">
+                    <span itemprop="name">算法导论blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/26/算法导论day1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/26/算法导论day1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="想要撸一遍算法导论的想法很早就有的，但是人之懒性无奈之，直到看到一句励志的话，你永远不知道，你以后要有多努力，才能弥补现在的懒惰。我这人很懒，索性现在稍微努力点，也是为了以后可以偷懒。所以now-rather-thinking-than-action。共勉之…"><a href="#想要撸一遍算法导论的想法很早就有的，但是人之懒性无奈之，直到看到一句励志的话，你永远不知道，你以后要有多努力，才能弥补现在的懒惰。我这人很懒，索性现在稍微努力点，也是为了以后可以偷懒。所以now-rather-thinking-than-action。共勉之…" class="headerlink" title="想要撸一遍算法导论的想法很早就有的，但是人之懒性无奈之，直到看到一句励志的话，你永远不知道，你以后要有多努力，才能弥补现在的懒惰。我这人很懒，索性现在稍微努力点，也是为了以后可以偷懒。所以now rather thinking than action。共勉之…"></a>想要撸一遍算法导论的想法很早就有的，但是人之懒性无奈之，直到看到一句励志的话，你永远不知道，你以后要有多努力，才能弥补现在的懒惰。我这人很懒，索性现在稍微努力点，也是为了以后可以偷懒。所以now rather thinking than action。共勉之…</h2><h2 id="算法导论day1"><a href="#算法导论day1" class="headerlink" title="算法导论day1"></a>算法导论day1</h2><h3 id="算法在计算中的作用"><a href="#算法在计算中的作用" class="headerlink" title="算法在计算中的作用"></a>算法在计算中的作用</h3><p>算法(algorithm)就是任何良定义的计算过程，该过程取某个值或值的集合作为输入并产生某个值或值的集合作为输出。这样算法就是把输入转换成输出的计算步骤的一个序列。</p>
+<h3 id="算法基础"><a href="#算法基础" class="headerlink" title="算法基础"></a>算法基础</h3><h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p>对于少量元素的排序，它是一个有效的算法。工作方式类似于排序一手扑克牌，开始时，我们的左手为空并依次拿走桌上的一张牌插入左手中正确的位置。为了找到一张牌的正确位置，我们从右到左将它与已在手中的每张牌进行比较。拿在手中的牌总是排序好的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.JackeyZz.day1;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">sort</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n=(<span class="keyword">int</span>) (Math.random()*<span class="number">10</span>+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">int</span>[] arr=<span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">		System.out.println(<span class="string">"产生的"</span>+n+<span class="string">"个随机数如下："</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(<span class="keyword">int</span>) (Math.random()*<span class="number">100</span>);</span><br><span class="line">			System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"插入排序结果如下："</span>);</span><br><span class="line">		insertsort(arr);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">			System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertsort</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> key;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;arr.length;j++)&#123;</span><br><span class="line">			key=arr[j];</span><br><span class="line">			<span class="keyword">int</span> i=j-<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">while</span>(i&gt;=<span class="number">0</span>&amp;&amp;arr[i]&gt;key)&#123;</span><br><span class="line">				arr[i+<span class="number">1</span>]=arr[i];</span><br><span class="line">				i=i-<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			arr[i+<span class="number">1</span>]=key;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="分析算法"><a href="#分析算法" class="headerlink" title="分析算法"></a>分析算法</h4><p>一般来说，算法所需要的时间与输入的规模同步增长，所以通常把一个程序的运行时间描述成其输入规模的函数。<br>输入规模的最佳概念依赖于研究的问题.如排序或者计算离散傅里叶变换，最自然的量度是输入中的项数。<br>一个算法在特定输入上的运行时间是指执行的基本操作数或步数。</p>
+<h4 id="设计算法"><a href="#设计算法" class="headerlink" title="设计算法"></a>设计算法</h4><p>1、分治法<br>许多有用的算法在结构上是递归的：为了解决一个给定的问题，算法一次或者多次递归地调用其自身以解决紧密相关的若干子问题。这些算法典型地遵循分治法的思想：将原问题分解为几个规模较小但类似于原问题的子问题，递归地求解这些子问题，然后再合并这些子问题的解来建立原问题的解。<br><strong>归并排序算法</strong>完全遵循了分治模式，直观上的操作如下：<br><strong>分解</strong>：分解待排序的n个元素的序列成各具n/2个元素的两个子序列。<br><strong>解决</strong>：使用归并排序递归地排序两个子序列。<br><strong>合并</strong>：合并两个已排序的子序列以产生已排序的答案。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.JackeyZz.day1;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">sort</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n=(<span class="keyword">int</span>) (Math.random()*<span class="number">10</span>+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">int</span>[] arr=<span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">		System.out.println(<span class="string">"产生的"</span>+n+<span class="string">"个随机数如下："</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(<span class="keyword">int</span>) (Math.random()*<span class="number">100</span>);</span><br><span class="line">			System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"插入排序结果如下："</span>);</span><br><span class="line">		<span class="comment">//insertsort(arr);</span></span><br><span class="line">		<span class="comment">//int[] arr1=&#123;3,1,2,4,5,6&#125;;</span></span><br><span class="line">		<span class="comment">//System.out.println(arr1.length);</span></span><br><span class="line">		<span class="comment">//merge(arr,0,1,arr.length-1);</span></span><br><span class="line">		mergesort(arr,<span class="number">0</span>,arr.length-<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">			System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> p,<span class="keyword">int</span> q,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n1,n2;</span><br><span class="line">		<span class="keyword">int</span> i,j;</span><br><span class="line">		n1=q-p+<span class="number">1</span>;</span><br><span class="line">		<span class="comment">//System.out.println(n1);</span></span><br><span class="line">		n2=r-q;</span><br><span class="line">		<span class="keyword">int</span>[] L=<span class="keyword">new</span> <span class="keyword">int</span>[n1];</span><br><span class="line">		<span class="keyword">int</span>[] R=<span class="keyword">new</span> <span class="keyword">int</span>[n2];</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n1;i++)&#123;</span><br><span class="line">			L[i]=arr[p+i];</span><br><span class="line">			<span class="comment">//System.out.print(L[i]+" ");</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//System.out.println("");</span></span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;n2;j++)&#123;</span><br><span class="line">			R[j]=arr[q+j+<span class="number">1</span>];</span><br><span class="line">			<span class="comment">//System.out.print(R[j]+" ");</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//System.out.println("");</span></span><br><span class="line">		<span class="comment">//L[n1]=(int) Double.NEGATIVE_INFINITY;</span></span><br><span class="line">		<span class="comment">//R[n2]=(int) Double.NEGATIVE_INFINITY;</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>,y=<span class="number">0</span>,k=p;k&lt;r;k++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(L[x]&lt;R[y])&#123;</span><br><span class="line">				arr[k]=L[x];</span><br><span class="line">				x=x+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				arr[k]=R[y];</span><br><span class="line">				y=y+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(x&gt;=n1)&#123;</span><br><span class="line">				System.arraycopy(R, y, arr, k+<span class="number">1</span>, R.length-y);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(y&gt;=n2)&#123;</span><br><span class="line">				System.arraycopy(L, x, arr, k+<span class="number">1</span>, L.length-x);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> p,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;r)&#123;</span><br><span class="line">			<span class="keyword">int</span> q=(<span class="keyword">int</span>) Math.floor((p+r)/<span class="number">2</span>);</span><br><span class="line">			mergesort(arr,p,q);</span><br><span class="line">			mergesort(arr,q+<span class="number">1</span>,r);</span><br><span class="line">			merge(arr,p,q,r);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>归并排序算法的关键操作在于“合并”步骤中两个已排序序列的合并。合并merge的过程用扑克牌解释：两堆已排好序的牌，最小的牌在最上面，比较最上面的两张牌，将较小的牌从堆上移出，重复这个步骤，直至其中一堆为空，再将剩余的堆直接移到输出堆。<br>在递归中返回条件是p≥r，即该子数组最多有一个元素，所以是已经排好序的，再由递归一步一步返回，直至返回排好序的序列。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A1[5] --&gt;|合并|B1(2 5)</span><br><span class="line">    A2[2] --&gt;|合并|B1</span><br><span class="line">    A3[4] --&gt;|合并|B2(4 7)</span><br><span class="line">    A4[7] --&gt;|合并|B2</span><br><span class="line">    A5[1] --&gt;|合并|B3(1 3)</span><br><span class="line">    A6[3] --&gt;|合并|B3</span><br><span class="line">    A7[2] --&gt;|合并|B4(2 6)</span><br><span class="line">    A8[6] --&gt;|合并|B4</span><br><span class="line">    B1 --&gt;|合并|C1(2 4 5 7)</span><br><span class="line">    B2 --&gt;|合并|C1(2 4 5 7)</span><br><span class="line">    B3 --&gt;|合并|C2(1 2 3 6)</span><br><span class="line">    B4 --&gt;|合并|C2(1 2 3 6)</span><br><span class="line">    C1 --&gt;|合并|D(1 2 2 3 4 5 6 7)</span><br><span class="line">    C2 --&gt;|合并|D(1 2 2 3 4 5 6 7)</span><br></pre></td></tr></table></figure></p>
+<p>2、分析分治算法<br>分治算法运行时间的递归式来自基本模式的三个步骤。假设T(n)是规模为n的一个问题的运行时间，将原问题分解为a个子问题，每个子问题的规模是原问题的1/b(对于归并排序，a和b都为2),为了求解一个规模为n/b的子问题，需要T(n/b)的时间，所以需要aT(n/b)的时间来求解a个子问题。如果分解问题为子问题需要时间D(n)，合并子问题的解成原问题的解需要时间C(n)，则得到</p>
+<p>3、冒泡排序<br>冒泡排序是一种简单的排序算法，名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。<br>算法flash演示：<br><a href="http://student.zjzk.cn/course_ware/data_structure/web/flashhtml/maopaopaixu.htm" target="_blank" rel="noopener">come in link</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.JackeyZz.day1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">sort</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n=(<span class="keyword">int</span>) (Math.random()*<span class="number">10</span>+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">int</span>[] arr=<span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">		System.out.println(<span class="string">"产生的"</span>+n+<span class="string">"个随机数如下："</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">			arr[i]=(<span class="keyword">int</span>) (Math.random()*<span class="number">100</span>);</span><br><span class="line">			System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"插入排序结果如下："</span>);</span><br><span class="line">		<span class="comment">//insertsort(arr);</span></span><br><span class="line">		<span class="comment">//mergesort(arr,0,arr.length-1);</span></span><br><span class="line">		bubblesort(arr);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">			System.out.print(arr[i]+<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubblesort</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> key;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=arr.length-<span class="number">1</span>;j&gt;i;j--)&#123;</span><br><span class="line">				<span class="keyword">if</span>(arr[j]&lt;arr[j-<span class="number">1</span>])&#123;</span><br><span class="line">					key=arr[j];</span><br><span class="line">					arr[j]=arr[j-<span class="number">1</span>];</span><br><span class="line">					arr[j-<span class="number">1</span>]=key;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/排序/" rel="tag"><i class="fa fa-tag"></i> 排序</a>
+          
+            <a href="/tags/分治/" rel="tag"><i class="fa fa-tag"></i> 分治</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/26/华工研究生中特大纲/" rel="next" title="华工研究生中特大纲">
+                <i class="fa fa-chevron-left"></i> 华工研究生中特大纲
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/26/算法导论day2/" rel="prev" title="算法导论day2">
+                算法导论day2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="JackeyZz">
+            
+              <p class="site-author-name" itemprop="name">JackeyZz</p>
+              <p class="site-description motion-element" itemprop="description">奋不顾身地前进，只为coding未来    得之幸之，失之淡之...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/JackeyZz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/代码dog也要文艺范JackeyZz" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="460649234@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#想要撸一遍算法导论的想法很早就有的，但是人之懒性无奈之，直到看到一句励志的话，你永远不知道，你以后要有多努力，才能弥补现在的懒惰。我这人很懒，索性现在稍微努力点，也是为了以后可以偷懒。所以now-rather-thinking-than-action。共勉之…"><span class="nav-number">1.</span> <span class="nav-text">想要撸一遍算法导论的想法很早就有的，但是人之懒性无奈之，直到看到一句励志的话，你永远不知道，你以后要有多努力，才能弥补现在的懒惰。我这人很懒，索性现在稍微努力点，也是为了以后可以偷懒。所以now rather thinking than action。共勉之…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法导论day1"><span class="nav-number">2.</span> <span class="nav-text">算法导论day1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法在计算中的作用"><span class="nav-number">2.1.</span> <span class="nav-text">算法在计算中的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法基础"><span class="nav-number">2.2.</span> <span class="nav-text">算法基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序"><span class="nav-number">2.2.1.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析算法"><span class="nav-number">2.2.2.</span> <span class="nav-text">分析算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计算法"><span class="nav-number">2.2.3.</span> <span class="nav-text">设计算法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackeyZz</span>
+
+  
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
