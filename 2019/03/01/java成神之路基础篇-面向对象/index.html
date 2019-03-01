@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="JackeyZz的博客主页">
 <meta property="og:description" content="前言  java成神之路基础篇之面向对象，包括面向对象、平台无关性、值传递、封装、继承、多态不积跬步无以至千里，不积小流无以成江海。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-01T12:52:56.576Z">
+<meta property="og:updated_time" content="2019-03-01T13:06:33.161Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java成神之路基础篇-面向对象">
 <meta name="twitter:description" content="前言  java成神之路基础篇之面向对象，包括面向对象、平台无关性、值传递、封装、继承、多态不积跬步无以至千里，不积小流无以成江海。">
@@ -422,7 +422,10 @@
 <ul>
 <li>先编写<code>.java</code>后缀的源程序文件</li>
 <li>然后编译成<code>.class</code>结尾的字节码文件</li>
-<li>然后不同的平台有对应的java虚拟机(比如windows有windows的java虚拟机,linux有linux的java虚拟机),不同的虚拟机都可以将<code>.class</code>文件解释成对应机器的机器码,这样就实现了一份源码,可以在不同的平台运行的目的,这就是java的平台无关性。此处平台就是指不同的操作系统<h3 id="Java如何实现的平台无关性"><a href="#Java如何实现的平台无关性" class="headerlink" title="Java如何实现的平台无关性"></a>Java如何实现的平台无关性</h3>java是一门高级语言，它通过其他的低级语言来实现一个虚拟机，虽然平台不同，但是也可以使用不同的技术来实现一个功能相近的虚拟机，然后java程序在虚拟机上运行，就“与平台无关”了。 而c和c++也可以跨平台，但是需要在不同平台下编译。<br>java所宣扬的跨平台性实际上是所谓的“一次编译，到处执行”，即只需在一个地方编译，在其他各个平台下都可以执行。之所以会这样，是因为他们编译出来的东西是不同的，而且编译出来的东西运行在的地方也不同。<br>java编译出来的是一种“java字节码”，由虚拟机去解释执行。而c和c++则编译成了二进制，直接交由操作系统执行。<br>正是因为有了虚拟机，java才有了这样的一个特性。<h4 id="Java从四个方面支持平台无关"><a href="#Java从四个方面支持平台无关" class="headerlink" title="Java从四个方面支持平台无关"></a>Java从四个方面支持平台无关</h4></li>
+<li>然后不同的平台有对应的java虚拟机(比如windows有windows的java虚拟机,linux有linux的java虚拟机),不同的虚拟机都可以将<code>.class</code>文件解释成对应机器的机器码,这样就实现了一份源码,可以在不同的平台运行的目的,这就是java的平台无关性。此处平台就是指不同的操作系统</li>
+</ul>
+<h3 id="Java如何实现的平台无关性"><a href="#Java如何实现的平台无关性" class="headerlink" title="Java如何实现的平台无关性"></a>Java如何实现的平台无关性</h3><p>java是一门高级语言，它通过其他的低级语言来实现一个虚拟机，虽然平台不同，但是也可以使用不同的技术来实现一个功能相近的虚拟机，然后java程序在虚拟机上运行，就“与平台无关”了。 而c和c++也可以跨平台，但是需要在不同平台下编译。<br>java所宣扬的跨平台性实际上是所谓的“一次编译，到处执行”，即只需在一个地方编译，在其他各个平台下都可以执行。之所以会这样，是因为他们编译出来的东西是不同的，而且编译出来的东西运行在的地方也不同。<br>java编译出来的是一种“java字节码”，由虚拟机去解释执行。而c和c++则编译成了二进制，直接交由操作系统执行。<br>正是因为有了虚拟机，java才有了这样的一个特性。</p>
+<h4 id="Java从四个方面支持平台无关"><a href="#Java从四个方面支持平台无关" class="headerlink" title="Java从四个方面支持平台无关"></a>Java从四个方面支持平台无关</h4><ul>
 <li>最主要的是Java平台本身。Java平台扮演Java程序和所在的硬件与操作系统之间的缓冲角色。这样Java程序只需要与Java平台打交道，而不用管具体的操作系统。</li>
 <li>Java语言保证了基本数据类型的值域和行为都是由语言自己定义的。而C/C++中，基本数据类是由它的占位宽度决定的，占位宽度由所在平台决定的。不同平台编译同一个C++程序会出现不同的行为。通过保证基本数据类型在所有平台的一致性，Java语言为平台无关性提供强有力的支持。</li>
 <li>Java class文件。Java程序最终会被编译成二进制class文件。class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载运行。它的格式有着严格的定义，是平台无关的。</li>
