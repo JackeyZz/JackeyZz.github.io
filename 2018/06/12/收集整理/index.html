@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="tf,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JackeyZz的博客主页" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="前言  关于tensorflow教程指南与实施案例的收集整理">
+<meta name="keywords" content="tf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="收集整理">
+<meta property="og:url" content="http://yoursite.com/2018/06/12/收集整理/index.html">
+<meta property="og:site_name" content="JackeyZz的博客主页">
+<meta property="og:description" content="前言  关于tensorflow教程指南与实施案例的收集整理">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-01T04:57:44.457Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="收集整理">
+<meta name="twitter:description" content="前言  关于tensorflow教程指南与实施案例的收集整理">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/12/收集整理/">
+
+
+
+
+
+  <title>收集整理 | JackeyZz的博客主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JackeyZz的博客主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/收集整理/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackeyZz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackeyZz的博客主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">收集整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T14:03:29+08:00">
+                2018-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂/" itemprop="url" rel="index">
+                    <span itemprop="name">杂</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/12/收集整理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/06/12/收集整理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>前言</code></p>
+<blockquote>
+<p>关于<code>tensorflow</code>教程指南与实施案例的收集整理<br><a id="more"></a></p>
+</blockquote>
+<hr>
+<h2 id="第一步：给TF新手的教程指南"><a href="#第一步：给TF新手的教程指南" class="headerlink" title="第一步：给TF新手的教程指南"></a>第一步：给TF新手的教程指南</h2><h3 id="1：tf初学者需要明白的入门准备"><a href="#1：tf初学者需要明白的入门准备" class="headerlink" title="1：tf初学者需要明白的入门准备"></a>1：tf初学者需要明白的入门准备</h3><p>机器学习入门笔记：</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/0_Prerequisite/ml_introduction.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/0_Prerequisite/ml_introduction.ipynb</a></p>
+</blockquote>
+<p>MNIST 数据集入门笔记</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/0_Prerequisite/mnist_dataset_intro.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/0_Prerequisite/mnist_dataset_intro.ipynb</a></p>
+</blockquote>
+<h3 id="2：tf初学者需要了解的入门基础"><a href="#2：tf初学者需要了解的入门基础" class="headerlink" title="2：tf初学者需要了解的入门基础"></a>2：tf初学者需要了解的入门基础</h3><p>Hello World</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/1_Introduction/helloworld.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/1_Introduction/helloworld.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/1_Introduction/helloworld.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/1_Introduction/helloworld.py</a></p>
+</blockquote>
+<p>基本操作</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/1_Introduction/basic_operations.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/1_Introduction/basic_operations.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/1_Introduction/basic_operations.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/1_Introduction/basic_operations.py</a></p>
+</blockquote>
+<h3 id="3：tf初学者需要掌握的基本模型"><a href="#3：tf初学者需要掌握的基本模型" class="headerlink" title="3：tf初学者需要掌握的基本模型"></a>3：tf初学者需要掌握的基本模型</h3><p>最近邻：</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/2_BasicModels/nearest_neighbor.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/2_BasicModels/nearest_neighbor.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/nearest_neighbor.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/nearest_neighbor.py</a></p>
+</blockquote>
+<p>线性回归：</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/2_BasicModels/linear_regression.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/2_BasicModels/linear_regression.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/linear_regression.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/linear_regression.py</a></p>
+</blockquote>
+<p>Logistic 回归：</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/2_BasicModels/logistic_regression.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/2_BasicModels/logistic_regression.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/logistic_regression.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/logistic_regression.py</a></p>
+</blockquote>
+<h3 id="4：tf初学者需要尝试的神经网络"><a href="#4：tf初学者需要尝试的神经网络" class="headerlink" title="4：tf初学者需要尝试的神经网络"></a>4：tf初学者需要尝试的神经网络</h3><p>多层感知器：</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/multilayer_perceptron.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/multilayer_perceptron.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/multilayer_perceptron.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/multilayer_perceptron.py</a></p>
+</blockquote>
+<p>卷积神经网络：</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/convolutional_network.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/convolutional_network.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/convolutional_network.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/convolutional_network.py</a></p>
+</blockquote>
+<p>循环神经网络（LSTM）：</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/recurrent_network.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/recurrent_network.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/recurrent_network.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/recurrent_network.py</a></p>
+</blockquote>
+<p>双向循环神经网络（LSTM）：</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/bidirectional_rnn.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/bidirectional_rnn.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/bidirectional_rnn.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/bidirectional_rnn.py</a></p>
+</blockquote>
+<p>动态循环神经网络（LSTM）</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/dynamic_rnn.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/dynamic_rnn.py</a></p>
+</blockquote>
+<p>自编码器</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/autoencoder.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/3_NeuralNetworks/autoencoder.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/autoencoder.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/3_NeuralNetworks/autoencoder.py</a></p>
+</blockquote>
+<h3 id="5：tf初学者需要精通的实用技术"><a href="#5：tf初学者需要精通的实用技术" class="headerlink" title="5：tf初学者需要精通的实用技术"></a>5：tf初学者需要精通的实用技术</h3><p>保存和恢复模型</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/4_Utils/save_restore_model.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/4_Utils/save_restore_model.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/4_Utils/save_restore_model.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/4_Utils/save_restore_model.py</a></p>
+</blockquote>
+<p>图和损失可视化</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/4_Utils/tensorboard_basic.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/4_Utils/tensorboard_basic.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/4_Utils/tensorboard_basic.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/4_Utils/tensorboard_basic.py</a></p>
+</blockquote>
+<p>Tensorboard——高级可视化</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/4_Utils/tensorboard_advanced.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/4_Utils/tensorboard_advanced.py</a></p>
+</blockquote>
+<h3 id="5：tf初学者需要的懂得的多GPU基本操作"><a href="#5：tf初学者需要的懂得的多GPU基本操作" class="headerlink" title="5：tf初学者需要的懂得的多GPU基本操作"></a>5：tf初学者需要的懂得的多GPU基本操作</h3><p>多 GPU 上的基本操作</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/5_MultiGPU/multigpu_basics.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/5_MultiGPU/multigpu_basics.ipynb</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/5_MultiGPU/multigpu_basics.py" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/5_MultiGPU/multigpu_basics.py</a></p>
+</blockquote>
+<h3 id="6：案例需要的数据集"><a href="#6：案例需要的数据集" class="headerlink" title="6：案例需要的数据集"></a>6：案例需要的数据集</h3><p>有一些案例需要 MNIST 数据集进行训练和测试。运行这些案例时，该数据集会被自动下载下来（使用 input_data.py）。<br>MNIST数据集笔记：</p>
+<blockquote>
+<p><a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/0_Prerequisite/mnist_dataset_intro.ipynb" target="_blank" rel="noopener">https://github.com/aymericdamien/TensorFlow-Examples/blob/master/notebooks/0_Prerequisite/mnist_dataset_intro.ipynb</a></p>
+</blockquote>
+<p>官方网站：<a href="http://yann.lecun.com/exdb/mnist/" target="_blank" rel="noopener">http://yann.lecun.com/exdb/mnist/</a></p>
+<h2 id="第二步：为TF新手准备的各个类型的案例、模型和数据集"><a href="#第二步：为TF新手准备的各个类型的案例、模型和数据集" class="headerlink" title="第二步：为TF新手准备的各个类型的案例、模型和数据集"></a>第二步：为TF新手准备的各个类型的案例、模型和数据集</h2><p>初步了解：TFLearnTensorFlow<br>接下来的示例来自TFLearn，这是一个为 TensorFlow 提供了简化的接口的库。里面有很多示例和预构建的运算和层。<br>使用教程：TFLearn 快速入门。通过一个具体的机器学习任务学习 TFLearn 基础。开发和训练一个深度神经网络分类器。<br>TFLearn地址：<a href="https://github.com/tflearn/tflearn" target="_blank" rel="noopener">https://github.com/tflearn/tflearn</a><br>示例：<a href="https://github.com/tflearn/tflearn/tree/master/examples" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/tree/master/examples</a><br>预构建的运算和层：<a href="http://tflearn.org/doc_index/#api" target="_blank" rel="noopener">http://tflearn.org/doc_index/#api</a><br>笔记：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/tutorials/intro/quickstart.md" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/tutorials/intro/quickstart.md</a></p>
+</blockquote>
+<p>基础模型以及数据集<br>线性回归，使用 TFLearn 实现线性回归</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/basics/linear_regression.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/basics/linear_regression.py</a></p>
+</blockquote>
+<p>逻辑运算符。使用 TFLearn 实现逻辑运算符</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/basics/logical.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/basics/logical.py</a></p>
+</blockquote>
+<p>权重保持。保存和还原一个模型</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/basics/weights_persistence.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/basics/weights_persistence.py</a></p>
+</blockquote>
+<p>微调。在一个新任务上微调一个预训练的模型</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/basics/finetuning.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/basics/finetuning.py</a></p>
+</blockquote>
+<p>使用 HDF5。使用 HDF5 处理大型数据集</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/basics/use_hdf5.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/basics/use_hdf5.py</a></p>
+</blockquote>
+<p>使用 DASK。使用 DASK 处理大型数据集</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/basics/use_dask.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/basics/use_dask.py</a></p>
+</blockquote>
+<p>计算机视觉模型及数据集<br>多层感知器。一种用于 MNIST 分类任务的多层感知实现</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/dnn.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/dnn.py</a></p>
+</blockquote>
+<p>卷积网络（MNIST）。用于分类 MNIST 数据集的一种卷积神经网络实现</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/convnet_mnist.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/convnet_mnist.py</a></p>
+</blockquote>
+<p>卷积网络（CIFAR-10）。用于分类 CIFAR-10 数据集的一种卷积神经网络实现</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/convnet_cifar10.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/convnet_cifar10.py</a></p>
+</blockquote>
+<p>网络中的网络。用于分类 CIFAR-10 数据集的 Network in Network 实现</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/network_in_network.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/network_in_network.py</a></p>
+</blockquote>
+<p>Alexnet。将 Alexnet 应用于 Oxford Flowers 17 分类任务</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/alexnet.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/alexnet.py</a></p>
+</blockquote>
+<p>VGGNet。将 VGGNet 应用于 Oxford Flowers 17 分类任务</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/vgg_network.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/vgg_network.py</a></p>
+</blockquote>
+<p>VGGNet Finetuning (Fast Training)。使用一个预训练的 VGG 网络并将其约束到你自己的数据上，以便实现快速训练</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/vgg_network_finetuning.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/vgg_network_finetuning.py</a></p>
+</blockquote>
+<p>RNN Pixels。使用 RNN（在像素的序列上）分类图像</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/rnn_pixels.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/rnn_pixels.py</a></p>
+</blockquote>
+<p>Highway Network。用于分类 MNIST 数据集的 Highway Network 实现</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/highway_dnn.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/highway_dnn.py</a></p>
+</blockquote>
+<p>Highway Convolutional Network。用于分类 MNIST 数据集的 Highway Convolutional Network 实现</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/convnet_highway_mnist.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/convnet_highway_mnist.py</a></p>
+</blockquote>
+<p>Residual Network (MNIST) 。应用于 MNIST 分类任务的一种瓶颈残差网络（bottleneck residual network）</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/residual_network_mnist.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/residual_network_mnist.py</a></p>
+</blockquote>
+<p>Residual Network (CIFAR-10)。应用于 CIFAR-10 分类任务的一种残差网络</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/residual_network_cifar10.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/residual_network_cifar10.py</a></p>
+</blockquote>
+<p>Google Inception（v3）。应用于 Oxford Flowers 17 分类任务的谷歌 Inception v3 网络</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/googlenet.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/googlenet.py</a></p>
+</blockquote>
+<p>自编码器。用于 MNIST 手写数字的自编码器</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/images/autoencoder.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/images/autoencoder.py</a></p>
+</blockquote>
+<p>自然语言处理模型及数据集<br>循环神经网络（LSTM），应用 LSTM 到 IMDB 情感数据集分类任</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/nlp/lstm.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/nlp/lstm.py</a></p>
+</blockquote>
+<p>双向 RNN（LSTM），将一个双向 LSTM 应用到 IMDB 情感数据集分类任务：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/nlp/bidirectional_lstm.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/nlp/bidirectional_lstm.py</a></p>
+</blockquote>
+<p>动态 RNN（LSTM），利用动态 LSTM 从 IMDB 数据集分类可变长度文本：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/nlp/dynamic_lstm.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/nlp/dynamic_lstm.py</a></p>
+</blockquote>
+<p>城市名称生成，使用 LSTM 网络生成新的美国城市名：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/nlp/lstm_generator_cityname.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/nlp/lstm_generator_cityname.py</a></p>
+</blockquote>
+<p>莎士比亚手稿生成，使用 LSTM 网络生成新的莎士比亚手稿：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/nlp/lstm_generator_shakespeare.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/nlp/lstm_generator_shakespeare.py</a></p>
+</blockquote>
+<p>Seq2seq，seq2seq 循环网络的教学示例：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/nlp/seq2seq_example.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/nlp/seq2seq_example.py</a></p>
+</blockquote>
+<p>CNN Seq，应用一个 1-D 卷积网络从 IMDB 情感数据集中分类词序列</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/nlp/cnn_sentence_classification.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/nlp/cnn_sentence_classification.py</a></p>
+</blockquote>
+<p>强化学习案例<br>Atari Pacman 1-step Q-Learning，使用 1-step Q-learning 教一台机器玩 Atari 游戏：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/reinforcement_learning/atari_1step_qlearning.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/reinforcement_learning/atari_1step_qlearning.py</a></p>
+</blockquote>
+<h2 id="第三步：为TF新手准备的其他方面内容"><a href="#第三步：为TF新手准备的其他方面内容" class="headerlink" title="第三步：为TF新手准备的其他方面内容"></a>第三步：为TF新手准备的其他方面内容</h2><p>Recommender-Wide&amp;Deep Network，推荐系统中 wide &amp; deep 网络的教学示例：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/others/recommender_wide_and_deep.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/others/recommender_wide_and_deep.py</a></p>
+</blockquote>
+<p>Spiral Classification Problem，对斯坦福 CS231n spiral 分类难题的 TFLearn 实现：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/notebooks/spiral.ipynb" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/notebooks/spiral.ipynb</a></p>
+</blockquote>
+<p>层，与 TensorFlow 一起使用 TFLearn 层：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/layers.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/layers.py</a></p>
+</blockquote>
+<p>训练器，使用 TFLearn 训练器类训练任何 TensorFlow 图：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/layers.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/layers.py</a></p>
+</blockquote>
+<p>Bulit-in Ops，连同 TensorFlow 使用 TFLearn built-in 操作：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/builtin_ops.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/builtin_ops.py</a></p>
+</blockquote>
+<p>Summaries，连同 TensorFlow 使用 TFLearn summarizers：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/summaries.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/summaries.py</a></p>
+</blockquote>
+<p>Variables，连同 TensorFlow 使用 TFLearn Variables：</p>
+<blockquote>
+<p><a href="https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/variables.py" target="_blank" rel="noopener">https://github.com/tflearn/tflearn/blob/master/examples/extending_tensorflow/variables.py</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tf/" rel="tag"><i class="fa fa-tag"></i> tf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/04/个性化推荐系统笔记/" rel="next" title="个性化推荐系统笔记">
+                <i class="fa fa-chevron-left"></i> 个性化推荐系统笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/26/deeplearning-word2vec/" rel="prev" title="deeplearning_word2vec">
+                deeplearning_word2vec <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="JackeyZz">
+            
+              <p class="site-author-name" itemprop="name">JackeyZz</p>
+              <p class="site-description motion-element" itemprop="description">奋不顾身地前进，只为coding未来    得之幸之，失之淡之...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/JackeyZz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/代码dog也要文艺范JackeyZz" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="460649234@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步：给TF新手的教程指南"><span class="nav-number">1.</span> <span class="nav-text">第一步：给TF新手的教程指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1：tf初学者需要明白的入门准备"><span class="nav-number">1.1.</span> <span class="nav-text">1：tf初学者需要明白的入门准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2：tf初学者需要了解的入门基础"><span class="nav-number">1.2.</span> <span class="nav-text">2：tf初学者需要了解的入门基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3：tf初学者需要掌握的基本模型"><span class="nav-number">1.3.</span> <span class="nav-text">3：tf初学者需要掌握的基本模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4：tf初学者需要尝试的神经网络"><span class="nav-number">1.4.</span> <span class="nav-text">4：tf初学者需要尝试的神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5：tf初学者需要精通的实用技术"><span class="nav-number">1.5.</span> <span class="nav-text">5：tf初学者需要精通的实用技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5：tf初学者需要的懂得的多GPU基本操作"><span class="nav-number">1.6.</span> <span class="nav-text">5：tf初学者需要的懂得的多GPU基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6：案例需要的数据集"><span class="nav-number">1.7.</span> <span class="nav-text">6：案例需要的数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步：为TF新手准备的各个类型的案例、模型和数据集"><span class="nav-number">2.</span> <span class="nav-text">第二步：为TF新手准备的各个类型的案例、模型和数据集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三步：为TF新手准备的其他方面内容"><span class="nav-number">3.</span> <span class="nav-text">第三步：为TF新手准备的其他方面内容</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackeyZz</span>
+
+  
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

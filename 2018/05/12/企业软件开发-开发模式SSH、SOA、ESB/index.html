@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="企业软件开发,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JackeyZz的博客主页" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="SSH见另外一篇博客内容 SOASOA的全称是Service-Oriented Architecture，面向服务架构。它是一种架构，不是一种具体的开发技术。SOA是通过功能组件化、服务化来实现系统集成、解决信息孤岛，这就是其主要目标。而更进一步则是实现更快响应业务的变化、更快推出新的应用系统。与此同时，SOA还实现了整合资源、资源复用。软件开发四阶段：  汇编语言开发 面向过程的软件 面向对象的">
+<meta name="keywords" content="企业软件开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="企业软件开发_开发模式SSH、SOA、ESB">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/index.html">
+<meta property="og:site_name" content="JackeyZz的博客主页">
+<meta property="og:description" content="SSH见另外一篇博客内容 SOASOA的全称是Service-Oriented Architecture，面向服务架构。它是一种架构，不是一种具体的开发技术。SOA是通过功能组件化、服务化来实现系统集成、解决信息孤岛，这就是其主要目标。而更进一步则是实现更快响应业务的变化、更快推出新的应用系统。与此同时，SOA还实现了整合资源、资源复用。软件开发四阶段：  汇编语言开发 面向过程的软件 面向对象的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic3.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic4.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic5.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic6.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic7.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic8.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic9.png">
+<meta property="og:updated_time" content="2018-09-22T07:36:53.361Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="企业软件开发_开发模式SSH、SOA、ESB">
+<meta name="twitter:description" content="SSH见另外一篇博客内容 SOASOA的全称是Service-Oriented Architecture，面向服务架构。它是一种架构，不是一种具体的开发技术。SOA是通过功能组件化、服务化来实现系统集成、解决信息孤岛，这就是其主要目标。而更进一步则是实现更快响应业务的变化、更快推出新的应用系统。与此同时，SOA还实现了整合资源、资源复用。软件开发四阶段：  汇编语言开发 面向过程的软件 面向对象的">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/">
+
+
+
+
+
+  <title>企业软件开发_开发模式SSH、SOA、ESB | JackeyZz的博客主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JackeyZz的博客主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackeyZz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackeyZz的博客主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">企业软件开发_开发模式SSH、SOA、ESB</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T19:52:57+08:00">
+                2018-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/课堂笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课堂笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><p><img src="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic1.png" alt=""><br><a href="http://jackeyzzhold.xyz/2018/03/10/java-ssh%E6%A1%86%E6%9E%B6-3/" target="_blank" rel="noopener">见另外一篇博客内容</a></p>
+<h2 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h2><p>SOA的全称是Service-Oriented Architecture，面向服务架构。它是一种架构，不是一种具体的开发技术。<br>SOA是通过功能组件化、服务化来实现系统集成、解决信息孤岛，这就是其主要目标。而更进一步则是实现更快响应业务的变化、更快推出新的应用系统。与此同时，SOA还实现了整合资源、资源复用。<br><strong>软件开发四阶段：</strong></p>
+<ul>
+<li>汇编语言开发</li>
+<li>面向过程的软件</li>
+<li>面向对象的组件开发</li>
+<li>面向服务的架构开发，即SOA</li>
+</ul>
+<p><strong>SOA特点：</strong></p>
+<ul>
+<li>SOA是一种开发思想。是一种松耦合的框架。可以让软件超越开发语言。</li>
+<li>SOA的开发需要SOA体系的支撑，就像J2EE应用一样，离不开应用服务器。SOA也一样，也有一个类似J2EE服务器的东西支持着整个SOA体系架构—-ESB(Enterprise Service Bus)，企业服务总线。通过这个总线，将多个系统连接起来。</li>
+<li>SOA是基于消息请求响应的一个系统，对请求类型有高度的兼容性。与一个Web应用容器相比，web应用容器只能处理HTTP请求，而 SOA的ESB可以接受HTTP、FTP、WebService、JMS…等请求。这就使得SOA架构具有高度的兼容性，可以将不同的平台集成到一起，从而相互协调工作。</li>
+</ul>
+<p><img src="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic2.png" alt=""></p>
+<p><strong>SOA的使用场景：</strong><br><img src="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic3.png" alt=""><br>通过上面的图我们可以看出，多个子系统直接相互交互，相互调用非常凌乱，这样我们就很不爽，所以我们就用到了我们的SOA架构，SOA又叫服务治理，SOA就是帮助我们把服务之间调用的乱七八糟的关系给治理起来，然后提供一个统一的标准，把我们的服务治理成下图所示，以前我们的服务是互相交互，现在是只对数据总线进行交互，这样系统就变得统一起来。<br><img src="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic4.png" alt=""><br>统一标准：各系统的协议、地址、交互方式。<br>新的交互方式：各个系统分别根据统一标准向数据总线进行注册，各子系统调用其他子系统时，我们并不关心如果找到其他子系统，我们只招数据总线，数据总线再根据统一标准找其他子系统，所以数据总线在这里充当一个只路人的作用。<br><strong>SOA的好处：</strong></p>
+<ul>
+<li>降低用户成本，用户不需要关心各服务之间是什么语言的、不需要知道如果调用他们，只要通过统一标准找数据总线就可以了。</li>
+<li>程序之间关系服务简单</li>
+<li>识别哪些程序有问题（挂掉）</li>
+</ul>
+<p><strong>缺点：</strong> 提示了系统的复杂程度，性能有相应影响。</p>
+<p><strong>数据总线：</strong><br><img src="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic5.png" alt=""><br>数据总线是起到调度服务的作用，数据总线不是集成服务，数据总线更新一个调度框架，每个服务需要根据约定向数据总线注册服务，那么如何注册那？其实数据总线就像一个字典结构，<br>数据总线里面一个key对于一个value，key指的是服务名，value则是服务的调度方式，还有一点需要说明的是，数据总线只是指路人，服务是不经过数据总线的，如上图的黄色线的路径。<br>数据总线通过域名解析实现:一个域名绑定多台服务器，ajax也可以，dns也可以，解析域名嘛。<br>其实数据总线还有一些高级应用，比如心跳检测，实现负载均衡等等，就不细说了，目前应用数据总线的有阿里的dubbo,还有zookeeper。</p>
+<h2 id="ESB"><a href="#ESB" class="headerlink" title="ESB"></a>ESB</h2><p>ESB是一种在松散耦合的服务和应用之间的标准的集成方式，可以作用于：</p>
+<ul>
+<li>面向服务的架构-分布式的应用由可重用的服务组成</li>
+<li>面向消息的架构-应用之间通过ESB发送和接受消息</li>
+<li>事件驱动的架构-应用之间异步地产生和接收消息</li>
+</ul>
+<p><img src="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic6.png" alt=""><br><img src="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic7.png" alt=""><br><img src="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic8.png" alt=""></p>
+<p><strong>ESB服务：</strong></p>
+<ul>
+<li>传输服务<ul>
+<li>安全、可靠的数据传输</li>
+<li>永久性/非永久性</li>
+<li>同步/异步</li>
+</ul>
+</li>
+<li>仲裁服务<ul>
+<li>路由</li>
+<li>格式转换</li>
+</ul>
+</li>
+<li>事件服务<ul>
+<li>事件发现和发布</li>
+<li>Publish/Subscribe</li>
+</ul>
+</li>
+</ul>
+<p><strong>ESB功能：</strong></p>
+<ul>
+<li>通信</li>
+<li>集成</li>
+<li>服务交互</li>
+<li>服务质量</li>
+<li>安全性</li>
+<li>消息处理</li>
+<li>服务级别</li>
+<li>管理和自治</li>
+<li>建模</li>
+<li>基础架构智能</li>
+</ul>
+<p><img src="/2018/05/12/企业软件开发-开发模式SSH、SOA、ESB/pic9.png" alt=""><br><strong>WebSphere DataPower</strong></p>
+<ul>
+<li>简化SOA</li>
+<li>保护SOA</li>
+<li>加速SOA</li>
+</ul>
+<p>应用场景：</p>
+<ul>
+<li>保护对外的web服务</li>
+<li>传统系统集成</li>
+<li>hub式的中介服务</li>
+<li>加速动态的web站点</li>
+</ul>
+<p><strong>不采用传统架构，而采用ESB总线的原因：</strong></p>
+<ul>
+<li>利用开放标准，将软件资产展现为服务的架构</li>
+<li>面向服务的体系架构</li>
+<li>总体性价比</li>
+</ul>
+<hr>
+<p><strong>OSB</strong></p>
+<ul>
+<li>易用性加强</li>
+<li>性能提升<ul>
+<li>采用Cache机制，为静态响应信息提升性能。静态响应信息是指在一段时间内不会发生变化的信息，如天气预报，手机套餐，人民币汇率等，这些数据变化的周期通常是1天，1月。</li>
+<li>实现手段：采用比较成熟的开源Memcached或者轻量级的JCACHE。</li>
+</ul>
+</li>
+<li>管控能力增强</li>
+</ul>
+<hr>
+<p><strong>Mule</strong></p>
+<ul>
+<li>社区活跃度</li>
+<li>易用性<br>“让一切变得更简单”是Mule的宗旨。2次重构核心架构、推出接入云应用，消息流，基于模式的配置以及热部署；Mule IDE3.0，将支持图元拖拽，简化开发。</li>
+<li>扩展性<br>增加一个新协议非常简单，只需实现5个接口类即可</li>
+<li>管理性<ul>
+<li>异常处理框架<br><strong>异常策略设置级别:</strong> model和service<br><strong>异常处理方式：</strong><ul>
+<li>1.将异常路由到指定的目的地</li>
+<li>2.根据异常类型过滤异常，并路由到指定目的地</li>
+<li>3.设置重试次数</li>
+<li>4.当采用了事务时，可以在异常处理策略中设置当发生异常时是继续提交还是回滚事务。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>文档<br>文档非常丰富，降低了使用门槛。</li>
+</ul>
+<hr>
+<p><strong>ServiceMix</strong><br><strong>优势：</strong></p>
+<ul>
+<li>无缝集成CXF,ActiveMQ,Camel和ODE</li>
+<li>JBI的优势</li>
+<li>基于OSGI</li>
+<li>基于Karaf</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>JBI规范太复杂</li>
+<li>架构复杂</li>
+<li>缺少IDE的支持</li>
+<li>缺少governor的支持</li>
+<li>学习门槛高</li>
+</ul>
+<hr>
+<p><strong>Synapse/WSO2 ESB</strong><br>WSO2 ESB对Synapse增加了企业级特征：</p>
+<ul>
+<li>1.基于WSO2的Carbon平台（OSGi框架）</li>
+<li>2.支持集群、负载均衡和failover routing</li>
+<li>3.支持流量控制和数据缓存</li>
+</ul>
+<p>还增加了外围产品：</p>
+<ul>
+<li><ol>
+<li>WSO2 Governance Registry，服务注册产品</li>
+</ol>
+</li>
+<li><ol>
+<li>WSO2 ESB management console，ESB管理控制台</li>
+</ol>
+</li>
+<li><ol>
+<li>WSO2 Carbon Studio，开发ESB的studio</li>
+</ol>
+</li>
+</ul>
+<p><strong>WSO2 ESB的优势：</strong></p>
+<ul>
+<li>基于Axis</li>
+<li>基于WSO2的Carbon平台</li>
+<li>支持集群<br>集群中节点间的通信框架基于Apache Tribes（组通信框架）<br>相关信息持久化在内嵌的Derby中<br>支持一个主节点和多个从节点</li>
+<li>failover routing<br>在集群环境中，所有的请求只能被主节点接收，从节点只能作为备份节点。</li>
+<li>支持流量控制<br>在单个ESB实例或者集群中，可以在服务级别配置流量控制。当请求数超过阀值时，ESB将被拒绝访问。<br>实现机制：借助组件Throttling Mediator</li>
+<li>支持数据缓存<br>集群中的各个ESB实例共享缓存的数据。当一个请求被ESB实例1处理完后返回响应信息，当再次向ESB实例1或者集群中其他的ESB实例发送该请求时，直接从缓存中取出原来的响应信息。<br>实现机制：借助组件Caching Mediator</li>
+<li>WSO2 Governance Registry：开源中最优秀的服务注册项目</li>
+<li>WSO2 ESB management console<br>创建和管理各组件（接入层、中介层和接出层）；<br>图形化地方式统计系统资源（CPU,内存）；<br>图像化统计ESB中各组件（接入层、中介层和接出层）接收发送消息的大小以及响应时间；<br>记录系统日志、SOAP日志；图形化显示消息的流向</li>
+<li>文档丰富</li>
+<li>大量使用实例</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>架构不够清晰</li>
+<li>扩展性差</li>
+<li>组件比较混乱</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/企业软件开发/" rel="tag"><i class="fa fa-tag"></i> 企业软件开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/12/企业软件开发-负载均衡/" rel="next" title="企业软件开发_负载均衡">
+                <i class="fa fa-chevron-left"></i> 企业软件开发_负载均衡
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/12/企业软件开发-大型系统设计关键技术/" rel="prev" title="企业软件开发_大型系统设计关键技术">
+                企业软件开发_大型系统设计关键技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="JackeyZz">
+            
+              <p class="site-author-name" itemprop="name">JackeyZz</p>
+              <p class="site-description motion-element" itemprop="description">奋不顾身地前进，只为coding未来    得之幸之，失之淡之...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/JackeyZz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/代码dog也要文艺范JackeyZz" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="460649234@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH"><span class="nav-number">1.</span> <span class="nav-text">SSH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SOA"><span class="nav-number">2.</span> <span class="nav-text">SOA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ESB"><span class="nav-number">3.</span> <span class="nav-text">ESB</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackeyZz</span>
+
+  
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
