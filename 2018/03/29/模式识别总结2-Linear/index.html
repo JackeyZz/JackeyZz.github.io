@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="模式识别,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JackeyZz的博客主页" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="PR_Linear(线性问题)贝叶斯决策的目标在于获取后验概率，而后验概率又可以由先验概率和类条件概率密度(Probability Density Function,PDF)两个量估计得到。先验概率的估计较为简单，其一可以用训练数据中各类出现的频率来估计得到；其二可以依靠经验。而PDF的估计是贝叶斯决策的重点，主要有两大类：    参数估计方法：先假定研究的问题具有某种数学模型，如正态分布、二项分">
+<meta name="keywords" content="模式识别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模式识别总结2_Linear">
+<meta property="og:url" content="http://yoursite.com/2018/03/29/模式识别总结2-Linear/index.html">
+<meta property="og:site_name" content="JackeyZz的博客主页">
+<meta property="og:description" content="PR_Linear(线性问题)贝叶斯决策的目标在于获取后验概率，而后验概率又可以由先验概率和类条件概率密度(Probability Density Function,PDF)两个量估计得到。先验概率的估计较为简单，其一可以用训练数据中各类出现的频率来估计得到；其二可以依靠经验。而PDF的估计是贝叶斯决策的重点，主要有两大类：    参数估计方法：先假定研究的问题具有某种数学模型，如正态分布、二项分">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/29/模式识别总结2-Linear/pic2.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/29/模式识别总结2-Linear/pic1.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/29/模式识别总结2-Linear/pic3.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/29/模式识别总结2-Linear/pic4.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/29/模式识别总结2-Linear/pic5.png">
+<meta property="og:updated_time" content="2018-09-22T07:36:53.478Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模式识别总结2_Linear">
+<meta name="twitter:description" content="PR_Linear(线性问题)贝叶斯决策的目标在于获取后验概率，而后验概率又可以由先验概率和类条件概率密度(Probability Density Function,PDF)两个量估计得到。先验概率的估计较为简单，其一可以用训练数据中各类出现的频率来估计得到；其二可以依靠经验。而PDF的估计是贝叶斯决策的重点，主要有两大类：    参数估计方法：先假定研究的问题具有某种数学模型，如正态分布、二项分">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/29/模式识别总结2-Linear/pic2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/29/模式识别总结2-Linear/">
+
+
+
+
+
+  <title>模式识别总结2_Linear | JackeyZz的博客主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JackeyZz的博客主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/29/模式识别总结2-Linear/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackeyZz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackeyZz的博客主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">模式识别总结2_Linear</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-29T20:18:39+08:00">
+                2018-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/课堂笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课堂笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/29/模式识别总结2-Linear/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/29/模式识别总结2-Linear/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="PR-Linear-线性问题"><a href="#PR-Linear-线性问题" class="headerlink" title="PR_Linear(线性问题)"></a>PR_Linear(线性问题)</h2><p>贝叶斯决策的目标在于获取后验概率，而后验概率又可以由先验概率和类条件概率密度(Probability Density Function,PDF)两个量估计得到。先验概率的估计较为简单，其一可以用训练数据中各类出现的频率来估计得到；其二可以依靠经验。而PDF的估计是贝叶斯决策的重点，主要有两大类：  </p>
+<ul>
+<li>参数估计方法：先假定研究的问题具有某种数学模型，如正态分布、二项分布等，再用已知类别的学习样本估计里面的参数。例如PDF是正态性的，符合$P(x|w_j)\sim N(\mu_i,\sum_i)$，则需要估计其中的两个参数。</li>
+<li>非参数估计方法：不假定数学模型，直接用已知类别的学习样本的先验知识直接估计数学模型。  </li>
+</ul>
+<p>参数估计和非参数估计都属于监督学习。</p>
+<h3 id="参数估计方法-Parametric-method"><a href="#参数估计方法-Parametric-method" class="headerlink" title="参数估计方法(Parametric method)"></a>参数估计方法(Parametric method)</h3><p>PDF形式确定，部分或全部参数不确定，因此要利用样本来估计这些未知参数，主要方法有最大似然估计和贝叶斯估计。</p>
+<h4 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h4><p>在参数空间中找到一个能够使得似然函数$I(\theta)$极大化的$\theta$值，把它当做最大似然估计量，其中最大化的方法为求导。</p>
+<h5 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h5><ul>
+<li>根据每个样本所属的类别来对一组样本进行分类，则有$c$个样本集$D_1,D_2,…,D_c$。而每个样本集中的样本都是独立的根据PDF来抽取的。</li>
+<li>PDF形式确定，其未知的部分就是具体的参数向量$\theta_j$的值，例如$p(x|w_j)\sim N(\mu_j,\sum_j)$，那么参数向量$\theta_j$就由分量$\mu_j,\sum_j$所组成。</li>
+<li>为了强调类条件概率密度函数$p(x|w_j)$依赖于参数向量$\theta_j$，通常写成$p(x|w_j,\theta_j)$这一形式。</li>
+<li>要解决的问题为，根据已有的训练样本，尽可能正确的估计各个类别的具体的参数向量$\theta_1,\theta_2,…,\theta_c$。</li>
+<li>属于类别$D_i$的训练样本对于参数向量$\theta_j(j\ne i)$的估计不提供任何信息，即每个参数向量$\theta_j$对它所属的类别起的作用都是相互独立的，因此可以对每个类别分别处理。  </li>
+</ul>
+<p>对$c$个独立的问题可以表述为：已知样本集$D$，其中每个样本都是独立的根据已知形式的概率密度函数$p(x|\theta)$抽取得到的，要求使用这些样本，估计概率密度函数中的参数向量$\theta$的值。<br>假设样本集$D$中有$n$个样本：$x_1,x_2,…,x_n$，由于这些样本是独立抽取的，故<br>$p(D|\theta)=\prod_{k=1}^n p(x_k|\theta)$<br>由于样本集$D$已知，故可以把$p(D|\theta)$看成是参数向量$\theta$的函数，被称为样本集$D$下的似然函数。根据定义，参数向量$\theta$的最大似然估计就是使$p(D|\theta)$达到最大值的相对应的$\widehat{\theta}$。<br>这里有个数学的知识点：如果实际的待求参数的个数为$p$，则参数向量$\theta$可以写成如下的$p$维向量的形式：$\theta=(\theta_1,\theta_2,…,\theta_p)^t$，则对其各个参数分别求偏导得到梯度算子为：<br>$\nabla_\theta=(\frac{\partial}{\partial \theta_1},\frac{\partial}{\partial \theta_2},…,\frac{\partial}{\partial \theta_p})^t$<br>求解$\widehat{\theta}$的步骤如下：  </p>
+<ul>
+<li>定义对数似然函数$l(\theta)$：$l(\theta)=lnp(D|\theta)=\sum_{k=1}^n lnp(x_k|\theta)$</li>
+<li>对对数似然函数求导得到：$\nabla_\theta l=\sum_{k=1}^n \nabla_\theta lnp(x_k|\theta)$</li>
+<li>令$\nabla_\theta l=0$得到由$p$个方程所组成的方程组</li>
+<li>注意求解出的$\widehat{\theta}$可能是真正的全局最大值点，也可能是局部极值点，或者仅仅是拐点，需要验证  </li>
+</ul>
+<h5 id="例子1：高斯分布-mu-未知"><a href="#例子1：高斯分布-mu-未知" class="headerlink" title="例子1：高斯分布($\mu$未知)"></a>例子1：高斯分布($\mu$未知)</h5><p><img src="/2018/03/29/模式识别总结2-Linear/pic2.png" alt=""></p>
+<h5 id="例子2：高斯分布-mu-sum-均未知"><a href="#例子2：高斯分布-mu-sum-均未知" class="headerlink" title="例子2：高斯分布($\mu,\sum$均未知)"></a>例子2：高斯分布($\mu,\sum$均未知)</h5><p><img src="/2018/03/29/模式识别总结2-Linear/pic1.png" alt=""><br>当高斯函数为多元时，其均值的最大似然估计依然为其样本均值，协方差的最大似然估计则是$n$个$(x_k-\widehat{\mu})(x_k-\widehat{\mu})^t$矩阵的算术平均。</p>
+<h4 id="贝叶斯估计"><a href="#贝叶斯估计" class="headerlink" title="贝叶斯估计"></a>贝叶斯估计</h4><p>贝叶斯学习方法中，我们把参数向量$\theta$本身看成一个随机变量，已有的训练样本使我们能够把对于$\theta$的初始密度的估计转化成后验概率密度。</p>
+<ul>
+<li>用D表示现有训练样本的集合，则后验概率为$P(w_i|x)=P(w_i|x,D)$，则贝叶斯公式可化为：<br>$P(w_i|x,D)=\dfrac{p(x|w_i,D)P(w_i|D)}{\sum_{j=1}^c p(x|w_j,D)P(w_j|D)}=\dfrac{p(x|w_i,D_i)P(w_i)}{\sum_{j=1}^c p(x|w_j,D_j)P(w_j)}$  </li>
+<li>贝叶斯学习的核心问题的实质在于：处理$c$个独立的问题，每一问题的形式为：已知一组训练样本D，这些样本都是从固定但未知的概率密度函数$p(x)$中独立抽取的，要求根据这些样本估计$p(x|D)$。<br>$p(x|D)=\int p(x,\theta|D)d\theta=\int p(x|\theta)p(\theta|D)d\theta$<br>上面式子把类条件概率密度$p(x|D)$和未知参量的后验概率密度$p(\theta|D)$联系起来，如果后验密度$p(\theta|D)$在某一个值$\widehat{\theta}$附近形成最显著的尖峰，那么就有$p(x|D)\approx p(x|\widehat{\theta})$。其中条件概率密度函数$p(x|\theta)$是完全已知的，虽然参数向量$\theta$的具体数值未知。  </li>
+<li>根据贝叶斯公式，有：<br>$p(\theta|D)=\dfrac{p(D|\theta)p(\theta)}{\int p(D|\theta)p(\theta)d\theta}$<br>其中参数向量的$\theta$的先验概率密度函数$p(\theta)$包含了我们对于$\theta$的全部先验知识。</li>
+<li>根据样本间的独立性假设，有：<br>$p(D|\theta)=\prod_{k=1}^n p(x_k|\theta)$</li>
+</ul>
+<h3 id="非参数估计方法-Non-Parametric-method"><a href="#非参数估计方法-Non-Parametric-method" class="headerlink" title="非参数估计方法(Non-Parametric method)"></a>非参数估计方法(Non-Parametric method)</h3><h3 id="线性分类模型-Linear-Classification-Models"><a href="#线性分类模型-Linear-Classification-Models" class="headerlink" title="线性分类模型(Linear Classification Models)"></a>线性分类模型(Linear Classification Models)</h3><p>分类的目的是给出一个输入向量，输出这个向量属于的类别，每一个输入只会有一个类别。因此输入空间被分为决策区域，它的边界被称为决策边界。而线性分类模型是指决策边界是关于输入向量$x$的线性函数，它在D维的输入空间中定义了D-1维的超平面。类别可以被线性决策边界分开的数据集被称为线性可分。<br><img src="/2018/03/29/模式识别总结2-Linear/pic3.png" alt=""><br>解决分类问题有三种不同的方法：  </p>
+<ul>
+<li>简单的判别函数(DF)：直接将输入向量$x$映射到特定的类别</li>
+<li>建模条件分布$p(c_k|x)$<ul>
+<li>直接建模：例如表示为参数模型，然后用训练数据计算出最优的参数</li>
+<li>利用类条件和先验概率，由贝叶斯公式计算出后验概率</li>
+</ul>
+</li>
+</ul>
+<h4 id="利用判别函数求解分类问题"><a href="#利用判别函数求解分类问题" class="headerlink" title="利用判别函数求解分类问题"></a>利用判别函数求解分类问题</h4><h5 id="两类问题"><a href="#两类问题" class="headerlink" title="两类问题"></a>两类问题</h5><p>最简单的线性判别函数是关于输入向量$x$的线性函数，即：<br>$g(x)=w^Tx+w_0$<br>其中$w$是权重向量，$w_0$是偏置(bias)，偏置的负数被称为阈值。<br>基于判别函数的分类决策规则为：$g(x)&gt;0$则为$C_1$类，否则为$C_2$类。因此决策边界为$g(x)=0$。<br><img src="/2018/03/29/模式识别总结2-Linear/pic4.png" alt=""></p>
+<h6 id="线性判别的几何意义"><a href="#线性判别的几何意义" class="headerlink" title="线性判别的几何意义"></a>线性判别的几何意义</h6><ul>
+<li>考虑两个点$x_A$和$x_B$，它们都在决策边界上，那么$g(x_A)=0,g(x_B)=0$，代入相减得到$w_T(x_A-x_B)=0$，因此显然向量$w$正交于决策边界，决定了决策边界的方向。  </li>
+<li>考虑$x$是决策边界上的一点，那么$g(x)=0,w^Tx+w_0=0$，故原点到决策边界的距离为$\dfrac{w^Tx}{||w||}=\dfrac{-w_0}{||w||}$，因此偏置参数$w_0$决定了决策边界的位置</li>
+</ul>
+<h6 id="任意点到决策面的距离"><a href="#任意点到决策面的距离" class="headerlink" title="任意点到决策面的距离"></a>任意点到决策面的距离</h6><ul>
+<li>$x$为任意点</li>
+<li>令$x_\perp$表示$x$到决策边界的正交投影<br>$x=x_\perp +r\dfrac{w}{||w||}$，其中$r$表示$x$到$x_\perp$之间的距离</li>
+<li>两边同时乘上$w^T$，由于$g(x_\perp)=0,w^T\bullet w=||w||^2$，故得到<br>$g(x)=0+r\bullet ||w||\Rightarrow r=\dfrac{g(x)}{||w||}$<br><img src="/2018/03/29/模式识别总结2-Linear/pic5.png" alt=""><h6 id="决策区域的凸性"><a href="#决策区域的凸性" class="headerlink" title="决策区域的凸性"></a>决策区域的凸性</h6></li>
+<li>在决策区域$R_k$中的两个点$x_a,x_b$</li>
+<li>对于在$x_a,x_b$连线上的任意点$x$，都有<br>$x=\lambda x_a+(1-\lambda)x_b\quad where\quad 0\le \lambda \le 1$  </li>
+<li>由线性判别函数$g_k(x)=w_k^T+w_{k0}$可得到<br>$g_k(x)=\lambda g_k(x_a)+(1-\lambda)g_k(x_b)$  </li>
+<li>由于$x_a,x_b$都在决策区域$R_k$内，那么对于所有的$j!=k$，满足<br>$g_k(x_a)&gt;g_j(x_a),and\quad g_k(x_b)&gt;g_j(x_b)\Rightarrow g_k(x)&gt;g_j(x)$，因此$x$也在决策区域$R_k$内，故区域$R_k$是单连通并且是凸的。</li>
+</ul>
+<h6 id="向量增强"><a href="#向量增强" class="headerlink" title="向量增强"></a>向量增强</h6><p><a href="模式识别笔记.pdf">pdf</a></p>
+<h6 id="线性分类模型"><a href="#线性分类模型" class="headerlink" title="线性分类模型"></a>线性分类模型</h6><h6 id="感知器算法"><a href="#感知器算法" class="headerlink" title="感知器算法"></a>感知器算法</h6><h6 id="最小二乘分类"><a href="#最小二乘分类" class="headerlink" title="最小二乘分类"></a>最小二乘分类</h6><h6 id="最小均方算法-LMS"><a href="#最小均方算法-LMS" class="headerlink" title="最小均方算法(LMS)"></a>最小均方算法(LMS)</h6><h6 id="广义线性模型"><a href="#广义线性模型" class="headerlink" title="广义线性模型"></a>广义线性模型</h6><h5 id="多类问题"><a href="#多类问题" class="headerlink" title="多类问题"></a>多类问题</h5><h6 id="c分类问题"><a href="#c分类问题" class="headerlink" title="c分类问题"></a>c分类问题</h6><h4 id="利用参数模型求解分类问题"><a href="#利用参数模型求解分类问题" class="headerlink" title="利用参数模型求解分类问题"></a>利用参数模型求解分类问题</h4><h4 id="利用贝叶斯公式求解分类问题"><a href="#利用贝叶斯公式求解分类问题" class="headerlink" title="利用贝叶斯公式求解分类问题"></a>利用贝叶斯公式求解分类问题</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/模式识别/" rel="tag"><i class="fa fa-tag"></i> 模式识别</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/23/模式识别总结1-Bayes/" rel="next" title="模式识别总结1_Bayes">
+                <i class="fa fa-chevron-left"></i> 模式识别总结1_Bayes
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/01/模式识别总结3-Neural/" rel="prev" title="模式识别总结3_Neural">
+                模式识别总结3_Neural <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="JackeyZz">
+            
+              <p class="site-author-name" itemprop="name">JackeyZz</p>
+              <p class="site-description motion-element" itemprop="description">奋不顾身地前进，只为coding未来    得之幸之，失之淡之...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/JackeyZz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/代码dog也要文艺范JackeyZz" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="460649234@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PR-Linear-线性问题"><span class="nav-number">1.</span> <span class="nav-text">PR_Linear(线性问题)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数估计方法-Parametric-method"><span class="nav-number">1.1.</span> <span class="nav-text">参数估计方法(Parametric method)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最大似然估计"><span class="nav-number">1.1.1.</span> <span class="nav-text">最大似然估计</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本原理"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#例子1：高斯分布-mu-未知"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">例子1：高斯分布($\mu$未知)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#例子2：高斯分布-mu-sum-均未知"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">例子2：高斯分布($\mu,\sum$均未知)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#贝叶斯估计"><span class="nav-number">1.1.2.</span> <span class="nav-text">贝叶斯估计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非参数估计方法-Non-Parametric-method"><span class="nav-number">1.2.</span> <span class="nav-text">非参数估计方法(Non-Parametric method)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性分类模型-Linear-Classification-Models"><span class="nav-number">1.3.</span> <span class="nav-text">线性分类模型(Linear Classification Models)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#利用判别函数求解分类问题"><span class="nav-number">1.3.1.</span> <span class="nav-text">利用判别函数求解分类问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#两类问题"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">两类问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#线性判别的几何意义"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">线性判别的几何意义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#任意点到决策面的距离"><span class="nav-number">1.3.1.1.2.</span> <span class="nav-text">任意点到决策面的距离</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#决策区域的凸性"><span class="nav-number">1.3.1.1.3.</span> <span class="nav-text">决策区域的凸性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#向量增强"><span class="nav-number">1.3.1.1.4.</span> <span class="nav-text">向量增强</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#线性分类模型"><span class="nav-number">1.3.1.1.5.</span> <span class="nav-text">线性分类模型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#感知器算法"><span class="nav-number">1.3.1.1.6.</span> <span class="nav-text">感知器算法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#最小二乘分类"><span class="nav-number">1.3.1.1.7.</span> <span class="nav-text">最小二乘分类</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#最小均方算法-LMS"><span class="nav-number">1.3.1.1.8.</span> <span class="nav-text">最小均方算法(LMS)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#广义线性模型"><span class="nav-number">1.3.1.1.9.</span> <span class="nav-text">广义线性模型</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多类问题"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">多类问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#c分类问题"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">c分类问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用参数模型求解分类问题"><span class="nav-number">1.3.2.</span> <span class="nav-text">利用参数模型求解分类问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用贝叶斯公式求解分类问题"><span class="nav-number">1.3.3.</span> <span class="nav-text">利用贝叶斯公式求解分类问题</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackeyZz</span>
+
+  
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
