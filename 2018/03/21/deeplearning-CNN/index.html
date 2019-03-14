@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JackeyZz的博客主页" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="概念卷积神经网络(Convolutional Neural Networks) 是一种在空间上共享参数的神经网络。使用数层卷积，而不是数层的矩阵相乘。在图像的处理过程中，每一张图片都可以看成一张“薄饼”，其中包括了图片的高度、宽度和深度（即颜色，用RGB表示）。在不改变权重的情况下，把这个上方具有k个输出的小神经网络对应的小块滑遍整个图像，可以得到一个宽度、高度不同，而且深度也不同的新图像。卷积时">
+<meta name="keywords" content="深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning_CNN">
+<meta property="og:url" content="http://yoursite.com/2018/03/21/deeplearning-CNN/index.html">
+<meta property="og:site_name" content="JackeyZz的博客主页">
+<meta property="og:description" content="概念卷积神经网络(Convolutional Neural Networks) 是一种在空间上共享参数的神经网络。使用数层卷积，而不是数层的矩阵相乘。在图像的处理过程中，每一张图片都可以看成一张“薄饼”，其中包括了图片的高度、宽度和深度（即颜色，用RGB表示）。在不改变权重的情况下，把这个上方具有k个输出的小神经网络对应的小块滑遍整个图像，可以得到一个宽度、高度不同，而且深度也不同的新图像。卷积时">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic1.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic2.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic3.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic4.gif">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic5.gif">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic6.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic7.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic8.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic9.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic10.gif">
+<meta property="og:updated_time" content="2018-09-22T07:36:52.891Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="deeplearning_CNN">
+<meta name="twitter:description" content="概念卷积神经网络(Convolutional Neural Networks) 是一种在空间上共享参数的神经网络。使用数层卷积，而不是数层的矩阵相乘。在图像的处理过程中，每一张图片都可以看成一张“薄饼”，其中包括了图片的高度、宽度和深度（即颜色，用RGB表示）。在不改变权重的情况下，把这个上方具有k个输出的小神经网络对应的小块滑遍整个图像，可以得到一个宽度、高度不同，而且深度也不同的新图像。卷积时">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/21/deeplearning-CNN/pic1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/21/deeplearning-CNN/">
+
+
+
+
+
+  <title>deeplearning_CNN | JackeyZz的博客主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JackeyZz的博客主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/deeplearning-CNN/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackeyZz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackeyZz的博客主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">deeplearning_CNN</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-21T19:02:10+08:00">
+                2018-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习整理总结/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习整理总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/21/deeplearning-CNN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/21/deeplearning-CNN/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>卷积神经网络(Convolutional Neural Networks)</strong> 是一种在空间上共享参数的神经网络。使用数层卷积，而不是数层的矩阵相乘。在图像的处理过程中，每一张图片都可以看成一张“薄饼”，其中包括了图片的高度、宽度和深度（即颜色，用RGB表示）。<br><img src="/2018/03/21/deeplearning-CNN/pic1.png" alt=""><br>在不改变权重的情况下，把这个上方具有k个输出的小神经网络对应的小块滑遍整个图像，可以得到一个宽度、高度不同，而且深度也不同的新图像。<br><img src="/2018/03/21/deeplearning-CNN/pic2.png" alt=""><br>卷积时有很多种填充图像的方法，以下主要介绍两种，一种是相同填充，一种是有效填充。<br><img src="/2018/03/21/deeplearning-CNN/pic3.png" alt=""><br>如图中紫色方框所示，左边是有效填充，右边是相同填充。在相同填充中，超出边界的部分使用补充0的办法，使得输入输出的图像尺寸相同。而在有效填充中，则不使用补充0的方法，不能超出边界，因此往往输入的尺寸大于输出的尺寸。</p>
+<h2 id="卷积过程"><a href="#卷积过程" class="headerlink" title="卷积过程"></a>卷积过程</h2><p><strong>深度为1的filter卷积计算：</strong><br>$$a_{i,j}=f(\sum_{m=0}^{2}\sum_{n=0}^{2}w_{m,n}x_{i+m,j+n}+w_b)$$<br><img src="/2018/03/21/deeplearning-CNN/pic4.gif" alt=""><br><strong>深度大于1的filter卷积计算：</strong><br>$$a_{i,j}=f(\sum_{d=0}^{D-1}\sum_{m=0}^{F-1}\sum_{n=0}^{F-1}w_{d,m,n}x_{d,i+m,j+n}+w_b)$$<br><img src="/2018/03/21/deeplearning-CNN/pic5.gif" alt=""><br>回顾整个过程，就是一层一层地增加网络深度，最终得到一个又深又窄的表示，然后把其连接到全连接层，然后训练分类器。<br><img src="/2018/03/21/deeplearning-CNN/pic6.png" alt=""><br><strong>例如：LeNet-5中的卷积与池化分析</strong><br><img src="/2018/03/21/deeplearning-CNN/pic7.png" alt=""><br>在LeNet-5中，输入层是32x32的尺寸。</p>
+<ul>
+<li>在第一次卷积中，使用了6个卷积核，得到了C1:6张28x28的特征图。<strong>(注:6个卷积核即为6个filter，这时每个filter都是一个二维权重矩阵，将6个filter与输入图像矩阵分别进行卷积计算，得到6个矩阵输出，即为6张特征图)</strong></li>
+<li>然后进行下采样，得到S2:特征图宽、高变为原来的1/2，即28/2=14，特征图尺寸变为14x14，特征图张数不变。</li>
+<li>再进行第二次卷积，使用了16个卷积核，得到了C3:16张10x10的特征图。<strong>(注：16个卷积核即为16个filter，此时每个filter都有6个二维权重矩阵对应输入的6张原始特征图，进行卷积最后得到16张特征图)</strong></li>
+<li>然后进行下采样，得到S4:特征图宽、高变为原来的1/2，即10/2=5，特征图尺寸变为5x5，特征图张数不变。</li>
+<li>之后进入卷积层C5，120张1x1全连接后的特征图，与S4全连接。</li>
+</ul>
+<p><strong>综上：1、filter的个数与输出的特征图数量一致；2、每个filter中的权重矩阵个数与输入的特征图数量一致</strong></p>
+<h2 id="局部连接与权重共享"><a href="#局部连接与权重共享" class="headerlink" title="局部连接与权重共享"></a>局部连接与权重共享</h2><p><img src="/2018/03/21/deeplearning-CNN/pic8.png" alt=""><br>总体而言，局部连接和权重共享都是减少参数的办法，使得特征提取更为有效。<br>上图中左半部分，是全连接神经网络的示例。图中是一个1000x1000的图像，下一隐藏层有106个神经元，那么就会有1000x1000x106=1012个参数。<br>上图右半部分，是局部连接神经网络的示例。图中依然是一个1000x1000的图像，下一隐藏层有106个神经元，但是使用了一个10x10的卷积核，连接到了10x10的局部图像，那么则会有10x10x106=108个参数。<br>可见局部连接可以很大幅度减少参数的数量。<br><img src="/2018/03/21/deeplearning-CNN/pic9.png" alt=""><br>在实际应用中，有一些情况比较特殊，涉及到了统计不变性的问题。比如我们想识别图像中的动物类别，那么动物在图片中的位置（左上角、中间或是右下角）是不重要的，这叫平移不变性；再比如说，在识别数字的过程中，数字的颜色并不影响结果；又或者说，在语言处理中，一些词汇在句子中的位置并不影响其代表的含义。当两种输入可以获得同样的信息，那么我们就应该共享权重而且利用这些输入来共同训练权重。<br>在上图中的左半部分，是未使用权重共享的局部连接神经网络的示例。<br>在上图中的右半部分，则使用了权重共享。图中是一个1000x1000的图像，有100个10x10的卷积核，最终会有100x10x10=10k个参数。使用局部连接和权重共享都大大地减小了参数数量。而共享权重使得统计不变性问题得到了有效解决。</p>
+<h2 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h2><p><img src="/2018/03/21/deeplearning-CNN/pic10.gif" alt=""><br>通过卷积后，为了引入不变性，同时防止过拟合问题或欠拟合问题、降低计算量，我们常进行池化处理。池化过程如上图所示。因此池化过后，通常图像的宽度和高度会变成原来的1/2。<br>其中包括了Max pooling 、 Mean pooling和Stochastic pooling三种池化方法。<br>两种较为常用的是：Max pooling和Mean pooling。Max pooling是选择kernel范围之内的最大值；Mean pooling则是选择kernel范围之内的平均值。</p>
+<h2 id="TensorFlow代码"><a href="#TensorFlow代码" class="headerlink" title="TensorFlow代码"></a>TensorFlow代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNN</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.x=tf.placeholder(<span class="string">'float'</span>,shape=[<span class="keyword">None</span>,<span class="number">784</span>])</span><br><span class="line">		self.y_=tf.placeholder(<span class="string">'float'</span>,shape=[<span class="keyword">None</span>,<span class="number">10</span>])</span><br><span class="line">		self.keep_prob=tf.placeholder(<span class="string">'float'</span>)</span><br><span class="line">	<span class="comment">## 权重初始化</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">weight_variable</span><span class="params">(self,shape)</span>:</span></span><br><span class="line">		initial=tf.truncated_normal(shape,stddev=<span class="number">0.1</span>)<span class="comment">#截断的产生正太分布的函数</span></span><br><span class="line">		<span class="keyword">return</span> tf.Variable(initial)</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">bias_variable</span><span class="params">(self,shape)</span>:</span></span><br><span class="line">		initial=tf.constant(<span class="number">0.1</span>,shape=shape)</span><br><span class="line">		<span class="keyword">return</span> tf.Variable(initial)</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">conv2d</span><span class="params">(self,x,w)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> tf.nn.conv2d(x,w,strides=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],padding=<span class="string">'SAME'</span>)<span class="comment">#padding='SAME'相同填充</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">max_pool_2x2</span><span class="params">(self,x)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> tf.nn.max_pool(x,ksize=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>],strides=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>],padding=<span class="string">'SAME'</span>)<span class="comment">#使用2x2的网格以max pooling的方法池化</span></span><br><span class="line">	<span class="comment">####构建卷积模型</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">makeModel</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="comment">#第一层卷积1---28*28</span></span><br><span class="line">		w_conv1=self.weight_variable([<span class="number">5</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">32</span>])<span class="comment">#5*5权重矩阵，1为输入通道filter，32为输出filter即为32张特征图</span></span><br><span class="line">		b_conv1=self.bias_variable([<span class="number">32</span>])</span><br><span class="line">		x_image=tf.reshape(self.x,[<span class="number">-1</span>,<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>]) <span class="comment">#使用reshape将输入转换为四维的tensor，其中第一维的－1是指我们可以先不指定，第二三维是指图像的大小，第四维对应颜色通道数目，灰度图对应1，rgb图对应3.</span></span><br><span class="line">		<span class="comment">## 32---28*28</span></span><br><span class="line">		h_conv1=tf.nn.relu(self.conv2d(x_image,w_conv1)+b_conv1)</span><br><span class="line">		<span class="comment">## 32---14*14</span></span><br><span class="line">		h_pool1=self.max_pool_2x2(h_conv1)</span><br><span class="line"></span><br><span class="line">		<span class="comment">#第二层卷积</span></span><br><span class="line">		w_conv2=self.weight_variable([<span class="number">5</span>,<span class="number">5</span>,<span class="number">32</span>,<span class="number">64</span>])</span><br><span class="line">		b_conv2=self.bias_variable([<span class="number">64</span>])</span><br><span class="line">		<span class="comment">## 64---14*14</span></span><br><span class="line">		h_conv2=tf.nn.relu(self.conv2d(h_pool1,w_conv2)+b_conv2)</span><br><span class="line">		<span class="comment">## 64---7*7</span></span><br><span class="line">		h_pool2=self.max_pool_2x2(h_conv2)</span><br><span class="line"></span><br><span class="line">		<span class="comment">#加入一个有1024个神经元的全连接层。之后把刚才池化后输出的张量reshape成一个一维向量，再将其与权重相乘，加上偏置项，再通过一个ReLU激活函数</span></span><br><span class="line">		w_fc1=self.weight_variable([<span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>,<span class="number">1024</span>])</span><br><span class="line">		b_fc1=self.bias_variable([<span class="number">1024</span>])</span><br><span class="line">		h_pool2_flat=tf.reshape(h_pool2,[<span class="number">-1</span>,<span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>])</span><br><span class="line">		h_fc1=tf.nn.relu(tf.matmul(h_pool2_flat,w_fc1)+b_fc1)</span><br><span class="line"></span><br><span class="line">		<span class="comment"># Dropout</span></span><br><span class="line">		h_fc1_drop=tf.nn.dropout(h_fc1,self.keep_prob)</span><br><span class="line"></span><br><span class="line">		<span class="comment">#输出层softmax</span></span><br><span class="line">		w_fc2=self.weight_variable([<span class="number">1024</span>,<span class="number">10</span>])</span><br><span class="line">		b_fc2=self.bias_variable([<span class="number">10</span>])</span><br><span class="line">		y_conv=tf.nn.softmax(tf.matmul(h_fc1_drop,w_fc2)+b_fc2)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> y_conv</span><br><span class="line">	<span class="comment">####训练和评估模型</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">train_and_eval_model</span><span class="params">(self)</span>:</span></span><br><span class="line">		y_conv=self.makeModel()</span><br><span class="line">		cross_entropy=-tf.reduce_sum(self.y_*tf.log(y_conv))</span><br><span class="line">		train_step=tf.train.AdamOptimizer(<span class="number">1e-4</span>).minimize(cross_entropy)</span><br><span class="line">		correct_prediction=tf.equal(tf.argmax(y_conv,<span class="number">1</span>),tf.argmax(self.y_,<span class="number">1</span>))</span><br><span class="line">		accuracy=tf.reduce_mean(tf.cast(correct_prediction,<span class="string">'float'</span>))</span><br><span class="line">		<span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">			sess.run(tf.initialize_all_variables())</span><br><span class="line">			<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20000</span>):</span><br><span class="line">				batch=mnist.train.next_batch(<span class="number">50</span>)</span><br><span class="line">				<span class="keyword">if</span> i%<span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">					train_accuracy=accuracy.eval(feed_dict=&#123;self.x:batch[<span class="number">0</span>],self.y_:batch[<span class="number">1</span>],self.keep_prob:<span class="number">1.0</span>&#125;)<span class="comment">##Session.run和Tensor.eval</span></span><br><span class="line">					print(<span class="string">'step %d,training accuracy %g'</span>%(i,train_accuracy))</span><br><span class="line">				train_step.run(feed_dict=&#123;self.x:batch[<span class="number">0</span>],self.y_:batch[<span class="number">1</span>],self.keep_prob:<span class="number">0.5</span>&#125;)</span><br><span class="line">			print(<span class="string">'test accuracy %g'</span>%accuracy.eval(feed_dict=&#123;self.x:mnist.test.images,self.y_:mnist.test.labels,self.keep_prob:<span class="number">1.0</span>&#125;))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"><i class="fa fa-tag"></i> 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/20/java-GC/" rel="next" title="java_GC">
+                <i class="fa fa-chevron-left"></i> java_GC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/21/deeplearning-RNN/" rel="prev" title="deeplearning_RNN">
+                deeplearning_RNN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="JackeyZz">
+            
+              <p class="site-author-name" itemprop="name">JackeyZz</p>
+              <p class="site-description motion-element" itemprop="description">奋不顾身地前进，只为coding未来    得之幸之，失之淡之...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/JackeyZz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/代码dog也要文艺范JackeyZz" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="460649234@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积过程"><span class="nav-number">2.</span> <span class="nav-text">卷积过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部连接与权重共享"><span class="nav-number">3.</span> <span class="nav-text">局部连接与权重共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#池化"><span class="nav-number">4.</span> <span class="nav-text">池化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow代码"><span class="nav-number">5.</span> <span class="nav-text">TensorFlow代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackeyZz</span>
+
+  
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
