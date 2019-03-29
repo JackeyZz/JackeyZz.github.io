@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="hexo,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JackeyZz的博客主页" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="github pages设置多分支master和hexo在github上创建两个分支master和hexo，其中master分支存放生成的静态网页，hexo分支用来存放网站的原始文件，也就是平时写文章的文件所在地。  先在github上创建分支 安装使用最新版的hexo-deployer-git插件 1npm install git+git@github.com:hexojs/hexo-deplo">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo博客的设置笔记">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/index.html">
+<meta property="og:site_name" content="JackeyZz的博客主页">
+<meta property="og:description" content="github pages设置多分支master和hexo在github上创建两个分支master和hexo，其中master分支存放生成的静态网页，hexo分支用来存放网站的原始文件，也就是平时写文章的文件所在地。  先在github上创建分支 安装使用最新版的hexo-deployer-git插件 1npm install git+git@github.com:hexojs/hexo-deplo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/pic1.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/pic2.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/pic3.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/pic5.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/pic4.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/pic6.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/pic7.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/pic8.png">
+<meta property="og:updated_time" content="2018-12-19T12:24:44.457Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo博客的设置笔记">
+<meta name="twitter:description" content="github pages设置多分支master和hexo在github上创建两个分支master和hexo，其中master分支存放生成的静态网页，hexo分支用来存放网站的原始文件，也就是平时写文章的文件所在地。  先在github上创建分支 安装使用最新版的hexo-deployer-git插件 1npm install git+git@github.com:hexojs/hexo-deplo">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/11/hexo博客的设置笔记/pic1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/hexo博客的设置笔记/">
+
+
+
+
+
+  <title>hexo博客的设置笔记 | JackeyZz的博客主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JackeyZz的博客主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/hexo博客的设置笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackeyZz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackeyZz的博客主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hexo博客的设置笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T21:21:40+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习工具整理总结/" itemprop="url" rel="index">
+                    <span itemprop="name">学习工具整理总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/11/hexo博客的设置笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/04/11/hexo博客的设置笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="github-pages设置多分支master和hexo"><a href="#github-pages设置多分支master和hexo" class="headerlink" title="github pages设置多分支master和hexo"></a>github pages设置多分支master和hexo</h2><p>在github上创建两个分支master和hexo，其中master分支存放生成的静态网页，hexo分支用来存放网站的原始文件，也就是平时写文章的文件所在地。</p>
+<ul>
+<li>先在github上创建分支<br><img src="/2018/04/11/hexo博客的设置笔记/pic1.png" alt=""></li>
+<li><p>安装使用最新版的<code>hexo-deployer-git</code>插件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install git+git<span class="meta">@github</span>.com:hexojs/hexo-deployer-git.git --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在文件<code>_config.yml</code>中设置  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  - type: git</span><br><span class="line">    repo: http:<span class="comment">//github.com/JackeyZz/JackeyZz.github.io.git</span></span><br><span class="line">    branch: master</span><br><span class="line">  - type: git</span><br><span class="line">    repo: http:<span class="comment">//github.com/JackeyZz/JackeyZz.github.io.git</span></span><br><span class="line">    branch: hexo</span><br><span class="line">    extend_dirs: /</span><br><span class="line">    ignore_hidden: <span class="keyword">false</span></span><br><span class="line">    ignore_pattern:</span><br><span class="line">        <span class="keyword">public</span>: .</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里是为了<code>hexo deploy</code>时将静态文件和原始文件上传到master分支和hexo分支上。即为<br><img src="/2018/04/11/hexo博客的设置笔记/pic2.png" alt=""><br><img src="/2018/04/11/hexo博客的设置笔记/pic3.png" alt="">  </p>
+<ul>
+<li>更换电脑时通过git重新下载整个项目，然后在本地切换到远端的hexo分支  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout origin/hexo</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>就能重新获得所有的源文件，重新进行修改发布。(注意对于从git下载下来的项目，最好将<code>.git</code>文件删除后重新生成，否则会出现错误)<br>这时需要在新电脑上down下来的文件夹上通过<code>git bash</code>依次执行下列指令：  </p>
+<pre><code class="java">npm install hexo
+npm install
+npm install hexo-deployer-git
+(不需要hexo init这条指令)
+</code></pre>
+<h2 id="设置pdf链接"><a href="#设置pdf链接" class="headerlink" title="设置pdf链接"></a>设置pdf链接</h2><p>其实这个问题只是本地<code>url</code>的小问题，浏览器自身是支持pdf显示的，跟<code>github pages</code>和<code>hexo</code>没什么关系。<br>在执行<code>hexo g</code>后，会生成<code>public</code>的文件夹，其中都是静态网页，而<code>github pages</code>的网页<code>url</code>就是对应这个文件夹产生的。因此只要使用<code>[名称](相对路径)</code>就可以在博客中嵌入pdf文章。例如当阅读需要嵌入pdf的博客文章时<br><img src="/2018/04/11/hexo博客的设置笔记/pic5.png" alt=""><br>显然它的<code>url</code>是文件夹<code>public</code>里对应的博客文章所生成的静态网页的文件夹里面，如<code>2018/04/11/论文阅读笔记1/#more</code>，故使用相对路径就可完成嵌入<code>pdf</code>文件。<br><img src="/2018/04/11/hexo博客的设置笔记/pic4.png" alt=""><br><img src="/2018/04/11/hexo博客的设置笔记/pic6.png" alt=""></p>
+<h2 id="设置sidebar"><a href="#设置sidebar" class="headerlink" title="设置sidebar"></a>设置sidebar</h2><p><code>sidebar</code>的前端网页在文件夹<code>themes/next/layout/_macro/sidebar.swig</code></p>
+<h2 id="如何设置文章主页显示内容"><a href="#如何设置文章主页显示内容" class="headerlink" title="如何设置文章主页显示内容"></a>如何设置文章主页显示内容</h2><p><img src="/2018/04/11/hexo博客的设置笔记/pic7.png" alt=""><br>在要显示的内容后面添加<code>&lt;!--more--&gt;</code>，表示前面的内容是要在主页上面显示的，同时支持markdown的编排语法。</p>
+<h2 id="如何设置页面元素样式"><a href="#如何设置页面元素样式" class="headerlink" title="如何设置页面元素样式"></a>如何设置页面元素样式</h2><p>如何把字体、页宽、按钮大小等等一些细节的东西调到自己喜欢的样式呢？那就是通过浏览器元素定位，调到自己喜欢的样式，然后加到<code>themes/next/source/css/_custom/custom.styl</code>文件下面。</p>
+<ul>
+<li>首先定位页面元素：用谷歌或者火狐浏览器打开博客页面，按下F12进入调试。先点击定位按钮，然后选择元素，然后在定位出来的样式进行修改，调到自己喜欢的样子。<br><img src="/2018/04/11/hexo博客的设置笔记/pic8.png" alt=""></li>
+<li>添加到样式文件：打开<code>themes/next/source/css/_custom/custom.styl</code>，把调试好的样式加进去，保存后Ctrl+F5就能看到效果了，前提是在本地运行的。</li>
+</ul>
+<p>但并不是所有的样式都能调，像页宽，多说评论的样式在custom.styl文件是无效的</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/11/ACO+TSP论文阅读/" rel="next" title="ACO+TSP论文阅读">
+                <i class="fa fa-chevron-left"></i> ACO+TSP论文阅读
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/16/企业软件开发-缓存设计/" rel="prev" title="企业软件开发_缓存设计">
+                企业软件开发_缓存设计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="JackeyZz">
+            
+              <p class="site-author-name" itemprop="name">JackeyZz</p>
+              <p class="site-description motion-element" itemprop="description">奋不顾身地前进，只为coding未来    得之幸之，失之淡之...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/JackeyZz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/代码dog也要文艺范JackeyZz" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="460649234@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github-pages设置多分支master和hexo"><span class="nav-number">1.</span> <span class="nav-text">github pages设置多分支master和hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置pdf链接"><span class="nav-number">2.</span> <span class="nav-text">设置pdf链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置sidebar"><span class="nav-number">3.</span> <span class="nav-text">设置sidebar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何设置文章主页显示内容"><span class="nav-number">4.</span> <span class="nav-text">如何设置文章主页显示内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何设置页面元素样式"><span class="nav-number">5.</span> <span class="nav-text">如何设置页面元素样式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackeyZz</span>
+
+  
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
