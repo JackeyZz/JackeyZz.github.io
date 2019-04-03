@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JackeyZz的博客主页" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="神经网络神经元(感知器)神经元是形成神经网络的基本结构。神经元接收输入，处理它并产生输出，而这个输出被发送到其他神经元用于进一步处理或者作为最终输出进行输出。可以看到，一个感知器有如下组成部分：  输入权值：一个感知器可以接收多个输入 $(x_1, x_2,…,x_n\mid x_i\in\Re)$，每个输入上都有一个权值$w_i\in\Re$。我们随机初始化权重，并在模型训练过程中更新这些权重。">
+<meta name="keywords" content="深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning_基础篇(1)">
+<meta property="og:url" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/index.html">
+<meta property="og:site_name" content="JackeyZz的博客主页">
+<meta property="og:description" content="神经网络神经元(感知器)神经元是形成神经网络的基本结构。神经元接收输入，处理它并产生输出，而这个输出被发送到其他神经元用于进一步处理或者作为最终输出进行输出。可以看到，一个感知器有如下组成部分：  输入权值：一个感知器可以接收多个输入 $(x_1, x_2,…,x_n\mid x_i\in\Re)$，每个输入上都有一个权值$w_i\in\Re$。我们随机初始化权重，并在模型训练过程中更新这些权重。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic1.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic2.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic3.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic6.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic4.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic5.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic7.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic8.png">
+<meta property="og:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic9.png">
+<meta property="og:updated_time" content="2018-09-22T07:36:52.986Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="deeplearning_基础篇(1)">
+<meta name="twitter:description" content="神经网络神经元(感知器)神经元是形成神经网络的基本结构。神经元接收输入，处理它并产生输出，而这个输出被发送到其他神经元用于进一步处理或者作为最终输出进行输出。可以看到，一个感知器有如下组成部分：  输入权值：一个感知器可以接收多个输入 $(x_1, x_2,…,x_n\mid x_i\in\Re)$，每个输入上都有一个权值$w_i\in\Re$。我们随机初始化权重，并在模型训练过程中更新这些权重。">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/pic1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/">
+
+
+
+
+
+  <title>deeplearning_基础篇(1) | JackeyZz的博客主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  
+  
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JackeyZz的博客主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/14/deeplearning-基础篇-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackeyZz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JackeyZz的博客主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">deeplearning_基础篇(1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T12:37:01+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习整理总结/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习整理总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/14/deeplearning-基础篇-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/14/deeplearning-基础篇-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><h3 id="神经元-感知器"><a href="#神经元-感知器" class="headerlink" title="神经元(感知器)"></a>神经元(感知器)</h3><p>神经元是形成神经网络的基本结构。神经元接收输入，处理它并产生输出，而这个输出被发送到其他神经元用于进一步处理或者作为最终输出进行输出。<br><img src="/2018/03/14/deeplearning-基础篇-1/pic1.png" alt="感知器"><br>可以看到，一个感知器有如下组成部分：</p>
+<ul>
+<li>输入权值：一个感知器可以接收多个输入 $(x_1, x_2,…,x_n\mid x_i\in\Re)$，每个输入上都有一个权值$w_i\in\Re$。我们随机初始化权重，并在模型训练过程中更新这些权重。训练后的神经网络对其输入赋予较高的权重，这是它认为与不那么重要的输入相比更为重要的输入。为零的权重则表示特定的特征是微不足道的。</li>
+<li>偏差：有一个偏置项$b\in\Re$，即为上图中的$w_0$。它被加到权重与输入相乘的结果中。基本上添加偏差的目的是来改变权重与输入相乘所得结果的范围的。</li>
+<li>激活函数：感知器的激活函数可以有很多选择，如<ul>
+<li>Sigmoid激活函数$\sigma(x)=\frac{1}{1+e^{-x}}\qquad$<br><img src="/2018/03/14/deeplearning-基础篇-1/pic2.png" alt="感知器"></li>
+<li>阶跃函数<br>$f(z)=\begin{cases}1\qquad z&gt;0\0\qquad otherwise\end{cases}$</li>
+<li>ReLU(整流线性单位) $f(x)=max(x,0)$<br><img src="/2018/03/14/deeplearning-基础篇-1/pic3.png" alt="感知器"></li>
+<li>tanh函数$f(x)=\frac{1-e^{-2x}}{1+e^{-2x}}$<br><img src="/2018/03/14/deeplearning-基础篇-1/pic6.png" alt="感知器"></li>
+</ul>
+</li>
+<li>输出：感知器的输出由下面的公式来计算：<br>$y=f(\mathrm{w}\bullet\mathrm{x}+b)\qquad$</li>
+</ul>
+<h3 id="输入-输出-隐藏层"><a href="#输入-输出-隐藏层" class="headerlink" title="输入/输出/隐藏层"></a>输入/输出/隐藏层</h3><p>输入层是接收数据的那一层，本质上是网络的第一层。而输出层是生成输出的那一层，也可以说是网络的最终层。处理层是网络中的隐藏层，这些隐藏层是对传入数据执行特定任务并将其生成的输出传递到下一层的那些层。输入层和输出层是我们可见的，而中间层则是隐藏的。<br><img src="/2018/03/14/deeplearning-基础篇-1/pic4.png" alt="感知器">  </p>
+<h3 id="MLP-多层感知器"><a href="#MLP-多层感知器" class="headerlink" title="MLP(多层感知器)"></a>MLP(多层感知器)</h3><p>单个神经元将无法执行高度复杂的任务。因此使用堆栈的神经元来生成我们所需要的输出。在最简单的网络中，我们将有一个输入层、一个隐藏层和一个输出层。每一层都有多个神经元，并且每个层中的所有神经元都连接到下一层的所有神经元。这些网络也可以称为完全连接的网络。<br><img src="/2018/03/14/deeplearning-基础篇-1/pic5.png" alt="感知器">  </p>
+<h3 id="正向传播-Forward-Propagation"><a href="#正向传播-Forward-Propagation" class="headerlink" title="正向传播(Forward Propagation)"></a>正向传播(Forward Propagation)</h3><p>正向传播是指输入通过隐藏层到输出层的运动。在正向传播中，信息沿着一个单一方向前进。输入层将输入提供给隐藏层，然后生成输出。这过程中是没有反向运动的。</p>
+<h3 id="成本函数-损失函数-Cost-Function"><a href="#成本函数-损失函数-Cost-Function" class="headerlink" title="成本函数/损失函数(Cost Function)"></a>成本函数/损失函数(Cost Function)</h3><p>当我们建立一个网络时，网络试图将输出预测得尽可能靠近实际值。我们使用成本/损失函数来衡量网络的准确性。而成本/损失函数会在发生错误时尝试惩罚网络。我们在运行网络时的目标是提高我们的预测精度并减少误差，从而较大限度地降低成本。最优化的输出是那些成本/损失函数值最小的输出。</p>
+<h3 id="线性单元"><a href="#线性单元" class="headerlink" title="线性单元"></a>线性单元</h3><p>感知器有一个问题，当面对的数据集不是线性可分的时候，“感知器规则”可能无法收敛，这就意味着我们永远也无法完成一个感知器的训练。为了解决这个问题，我们使用一个可导的线性函数来替代感知器的阶跃函数，这种感知器就叫做<code>线性单元</code>。线性单元在面对线性不可分的数据集时，会收敛到一个最佳的近似上。<br><img src="/2018/03/14/deeplearning-基础篇-1/pic7.png" alt="线性单元"><br>替换了线性激活函数后，线性单元将返回一个实数值而不是0,1分类。因此线性单元用来解决回归问题而不是分类问题。</p>
+<h3 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h3><p>监督学习是指为了训练一个模型，我们要提供这样一堆训练样本：每个训练样本既包括输入特征$x$，也包括对应的输出$y$($y$也叫做标记<code>label</code>)。用这样的样本去训练模型，让模型既看到我们提出的每个问题(输入特征$x$)，也看到对应问题的答案(标记$y$)。当模型看到足够多的样本之后，它就能总结出其中的一些规律，获取预测最接近真实结果相对应的权重。  </p>
+<ul>
+<li>回归分析(Regression Analysis)：其数据集是给定一个函数和它的一些坐标点，然后通过回归分析的算法，来估计原函数的模型，求出一个最符合这些已知数据集的函数解析式。然后它就可以用来预估其他未知输出的数据了，你输入一个自变量它就会根据这个模型解析式输出一个因变量，这些自变量就是特征向量，因变量就是标签。而且标签的值是建立在连续范围的。</li>
+<li>分类(Classification)：其数据集，由特征向量和它们的标签组成，当你学习了这些数据之后，给你一个只知道特征向量而不知道标签的数据，让你求它的标签是哪一个？其和回归的主要区别就是输出结果是离散的还是连续的。</li>
+</ul>
+<h3 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h3><p>非监督学习的训练样本中只有$x$而没有$y$。模型可以总结出特征$x$的一些规律，但是无法知道其对应的答案$y$。输入特征没有对应的<code>label</code>，数据类别未知，需要根据样本间的相似性对样本集进行分类(聚类<code>clustering</code>)试图使类内差距最小化，类间差距最大化。通俗点将就是实际应用中，不少情况下无法预先知道样本的标签，也就是说没有训练样本对应的类别，因而只能从原先没有样本标签的样本集开始学习分类器设计。<br>无监督学习的方法分为两大类：</p>
+<ul>
+<li>一类为基于概率密度函数估计的直接方法：指设法找到各类别在特征空间的分布参数，再进行分类</li>
+<li>另一类是称为基于样本间相似性度量的简洁聚类方法：其原理是设法定出不同类别的核心或初始内核，然后依据样本与核心之间的相似性度量将样本聚集成不同的类别。  </li>
+</ul>
+<p>利用聚类结果，可以提取数据集中隐藏信息，对未来数据进行分类和预测。应用于数据挖掘，模式识别，图像处理等。</p>
+<h3 id="梯度下降-Gradient-Descent"><a href="#梯度下降-Gradient-Descent" class="headerlink" title="梯度下降(Gradient Descent)"></a>梯度下降(Gradient Descent)</h3><h3 id="学习率-Learning-Rate"><a href="#学习率-Learning-Rate" class="headerlink" title="学习率(Learning Rate)"></a>学习率(Learning Rate)</h3><p>学习率被定义为每次迭代中成本函数中最小化的量。简单的说，我们下降到成本函数的最小值的速率是学习率。</p>
+<h3 id="反向传播-Backpropagation"><a href="#反向传播-Backpropagation" class="headerlink" title="反向传播(Backpropagation)"></a>反向传播(Backpropagation)</h3><p>当我们定义神经网络时，我们为我们的节点分配随机权重和偏差值。一旦我们收到单次迭代的输出，我们就可以计算出网络的错误，然后将该错误与成本函数的梯度一起反馈给网络以更新网络的权重，最后更新这些权重，以便减少后续迭代中的错误。使用成本函数的梯度的权重的更新被称为<code>反向传播</code>。在反向传播中，网络的运动是向后的，错误随着梯度从外层通过隐藏层流回，权重被更新。</p>
+<h3 id="批次-Batches"><a href="#批次-Batches" class="headerlink" title="批次(Batches)"></a>批次(Batches)</h3><p>在训练神经网络的同时，不用一次发送整个输入，我们将输入分成几个随机大小相等的块。与整个数据集一次性馈送到网络时建立的模型相比，批量训练数据使得模型更加广义化。</p>
+<h3 id="周期-Epochs"><a href="#周期-Epochs" class="headerlink" title="周期(Epochs)"></a>周期(Epochs)</h3><p>周期被定义为向前和向后传播中所有批次的单次训练迭代，这就意味着一个周期是整个输入数据的单次向前和向后传递。你可以选择你用来训练网络的周期数量，更多的周期将显示出更高的网络准确性，然而，网络融合也需要更长的时间。另外，如果周期数太高，网络可能会过度拟合。</p>
+<h3 id="丢弃-Dropout"><a href="#丢弃-Dropout" class="headerlink" title="丢弃(Dropout)"></a>丢弃(Dropout)</h3><p>Dropout是一种正则化技术，可防止网络过度拟合。顾名思义，在训练期间，隐藏层中的一定数量的神经元被随机地丢弃，这意味着训练发生在神经网络的不同组合的神经网络的几个架构上。你可以将Dropout视为一种综合技术，然后将多个网络的输出用于产生最终输出。<br><img src="/2018/03/14/deeplearning-基础篇-1/pic8.png" alt="感知器"></p>
+<h3 id="批量归一化-Batch-Normalization"><a href="#批量归一化-Batch-Normalization" class="headerlink" title="批量归一化(Batch Normalization)"></a>批量归一化(Batch Normalization)</h3><p>通俗点，批量归一化可以被认为是河流中设定的特定检查点的水坝。这样做的目的是在于确保数据的分发与希望获得的下一层相同。当我们训练神经网络时，权重在梯度下降的每一个步骤之后都会改变，这会改变数据的形状如何发送到下一层。故在将数据发送到下一层之前明确规范化数据。<br><img src="/2018/03/14/deeplearning-基础篇-1/pic9.png" alt="感知器"></p>
+<h3 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h3><h3 id="数据增强-Data-Augmentation"><a href="#数据增强-Data-Augmentation" class="headerlink" title="数据增强(Data Augmentation)"></a>数据增强(Data Augmentation)</h3><p>数据增强是指从给定数据导出的新数据的添加，这可能被证明对预测有益。例如，如果你使光线变亮，可能更容易在较暗的图像中看到猫，或者例如数字识别中的9可能会稍微倾斜或旋转，在这种情况下，旋转将解决问题并提高我们的模型的准确性。通过旋转或增亮，我们正在提高数据的质量，这被称为<code>数据增强</code>。</p>
+<h3 id="循环神经网络"><a href="#循环神经网络" class="headerlink" title="循环神经网络"></a>循环神经网络</h3><h3 id="消失梯度问题-Vanishing-Gradient-Problem"><a href="#消失梯度问题-Vanishing-Gradient-Problem" class="headerlink" title="消失梯度问题(Vanishing Gradient Problem)"></a>消失梯度问题(Vanishing Gradient Problem)</h3><p>激活函数的梯度非常小的情况下会出现消失梯度问题。在权重乘以这些低梯度时的反向传播过程中，它们往往变得非常小，并且随着网络进一步深入而“消失”，这使得神经网络忘记了长距离依赖，对循环神经网络来说是个问题，长期依赖对于网络来说是非常重要的。可以通过使用不具有小梯度的激活函数<code>ReLU</code>来解决。</p>
+<h3 id="激增梯度问题-Exploding-Gradient-Problem"><a href="#激增梯度问题-Exploding-Gradient-Problem" class="headerlink" title="激增梯度问题(Exploding Gradient Problem)"></a>激增梯度问题(Exploding Gradient Problem)</h3><p>跟消失梯度问题相反，激活函数的梯度过大，导致了激增梯度问题。在方向传播期间，它使特定节点的权重相对于其他节点的权重非常高，这使得它们不重要。这可以通过剪切梯度来轻松解决，使其不超过一定值。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"><i class="fa fa-tag"></i> 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/11/java-JVM/" rel="next" title="java_JVM">
+                <i class="fa fa-chevron-left"></i> java_JVM
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/15/web挖掘与信息检索-论文/" rel="prev" title="web挖掘与信息检索_论文">
+                web挖掘与信息检索_论文 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="JackeyZz">
+            
+              <p class="site-author-name" itemprop="name">JackeyZz</p>
+              <p class="site-description motion-element" itemprop="description">奋不顾身地前进，只为coding未来    得之幸之，失之淡之...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/JackeyZz" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/代码dog也要文艺范JackeyZz" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="460649234@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#神经元-感知器"><span class="nav-number">1.1.</span> <span class="nav-text">神经元(感知器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入-输出-隐藏层"><span class="nav-number">1.2.</span> <span class="nav-text">输入/输出/隐藏层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MLP-多层感知器"><span class="nav-number">1.3.</span> <span class="nav-text">MLP(多层感知器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正向传播-Forward-Propagation"><span class="nav-number">1.4.</span> <span class="nav-text">正向传播(Forward Propagation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成本函数-损失函数-Cost-Function"><span class="nav-number">1.5.</span> <span class="nav-text">成本函数/损失函数(Cost Function)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性单元"><span class="nav-number">1.6.</span> <span class="nav-text">线性单元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监督学习"><span class="nav-number">1.7.</span> <span class="nav-text">监督学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非监督学习"><span class="nav-number">1.8.</span> <span class="nav-text">非监督学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度下降-Gradient-Descent"><span class="nav-number">1.9.</span> <span class="nav-text">梯度下降(Gradient Descent)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习率-Learning-Rate"><span class="nav-number">1.10.</span> <span class="nav-text">学习率(Learning Rate)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播-Backpropagation"><span class="nav-number">1.11.</span> <span class="nav-text">反向传播(Backpropagation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批次-Batches"><span class="nav-number">1.12.</span> <span class="nav-text">批次(Batches)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#周期-Epochs"><span class="nav-number">1.13.</span> <span class="nav-text">周期(Epochs)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#丢弃-Dropout"><span class="nav-number">1.14.</span> <span class="nav-text">丢弃(Dropout)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量归一化-Batch-Normalization"><span class="nav-number">1.15.</span> <span class="nav-text">批量归一化(Batch Normalization)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积神经网络"><span class="nav-number">1.16.</span> <span class="nav-text">卷积神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据增强-Data-Augmentation"><span class="nav-number">1.17.</span> <span class="nav-text">数据增强(Data Augmentation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环神经网络"><span class="nav-number">1.18.</span> <span class="nav-text">循环神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消失梯度问题-Vanishing-Gradient-Problem"><span class="nav-number">1.19.</span> <span class="nav-text">消失梯度问题(Vanishing Gradient Problem)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激增梯度问题-Exploding-Gradient-Problem"><span class="nav-number">1.20.</span> <span class="nav-text">激增梯度问题(Exploding Gradient Problem)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackeyZz</span>
+
+  
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
